@@ -67,7 +67,7 @@ obj.TerminateWizHelper();
 ```
 This object reference will be used for all the imaging functionalities.
 
-## CameraHelper
+## Functionalties
 
 1. **CompressToTiff**	 -	*This function compresses multiple Images to a single tiff files.* 
 2. **CompressToTiff**	 -	*This function compresses multiple images to a single PDF file*
@@ -81,8 +81,14 @@ C/C++ usage
 //C/C++
 HANDLE WINAPI Initialize (char *Logpath)
 ```
+This function is used to initialize the DLL and validate the license. This function should be called once 
+per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
+handle.
 
+## Parameter Name
 
+1. **Logpath** - Pass a path with write acccess to the application. Debug logs are created in this path. This is
+   optional parameter. Debugging is not required then this can be kept as null.
 
 
  
