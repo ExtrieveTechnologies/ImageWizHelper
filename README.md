@@ -79,11 +79,11 @@ C/C++ usage
 1. **HandleWindowsApi** - *This function is used to initialize the DLL and validate the license. This function should
 be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
 handle.*
-
-```C/C++
-//C/C++
-HANDLE WINAPI Initialize (char *Logpath)
-```
+ 
+ ```C/C++
+ //C/C++
+ HANDLE WINAPI Initialize (char *Logpath)
+ ```
 
 
 Parameter Name
