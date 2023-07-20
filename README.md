@@ -37,12 +37,22 @@ You can download the **.aar** library file from GitHub's [releases page](https:/
 
 Compatibility
 -------------
- * **JAVA 8 Support**: QuickCapture v3 requires JAVA version 8 support for the application.
- * **Minimum Android SDK**: QuickCapture v3 requires a minimum API level of 21.
- * **Compiled SDK Version**: QuickCapture v3 compiled against **API 34**.
+Currently the DLL API's are available in:
+ * **C**
+ * **C++**
+ * **C#**
  
 
-## API and  integration  Details - Available properties and method
+## C# usage
+
+As a wrapper class called ImageWizHelperAPI provided which can be used for C#. DLL has to be 
+initialized first before use. Following is the sample code for the initialization of the DLL
+
+```C#
+//C#
+ImageWizHelperAPI obj = new ImageWizHelperAPI();
+obj.InitializeWizHelper(local_bin_path, local_error_log_path);
+```
 
 SDK have two core classes and supporting classes :
 
