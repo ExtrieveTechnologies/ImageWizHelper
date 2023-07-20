@@ -43,9 +43,10 @@ Currently the DLL API's are available in:
  * **C#**
  
 
-## C# usage
+C# usage
+-------------
 
-As a wrapper class called ImageWizHelperAPI provided which can be used for C#. DLL has to be 
+A wrapper class called ImageWizHelperAPI is provided which can be used for C#. DLL has to be 
 initialized first before use. Following is the sample code for the initialization of the DLL
 
 ```C#
@@ -53,13 +54,37 @@ initialized first before use. Following is the sample code for the initializatio
 ImageWizHelperAPI obj = new ImageWizHelperAPI();
 obj.InitializeWizHelper(local_bin_path, local_error_log_path);
 ```
+This function should be called once per thread by the application. If the application is used in a multithreaded
+context then each thread should initialize a different ImageWizHelperAPI object and initialize once before using 
+it.
 
-SDK have two core classes and supporting classes :
+**local_error_log_path** - This path is optional. Pass a path with write access for the application. This will 
+create log files which can be used for debugging any issues. If this is not passed then loggin will be disabled.
 
- 1. **CameraHelper**	-	*Handle the  camera  related  operations. Basically, an activity.* 
- 2. **ImgHelper**	-	*Purpose of this class is to handle all imaging related operations.*
- 3. **Config**		-	*Holds various configurations SDK.* 
- 4. **ImgException**	-	*Handle all exceptions on image related operations on ImgHelper.*
+```C#
+//C#
+obj.TerminateWizHelper();
+```
+This object reference will be used for all the imaging functionalities.
+
+## CameraHelper
+
+1. **CompressToTiff**	 -	*This function compresses multiple Images to a single tiff files.* 
+2. **CompressToTiff**	 -	*This function compresses multiple images to a single PDF file*
+3. **CompressToJpeg**	 -	*This function converts a sigle image file to JEPG file* 
+4. **AppendToTiffImage** -	*This function appends a single image file over an exisitng Tiff file*
+
+C/C++ usage
+-------------
+
+```C/C++
+//C/C++
+HANDLE WINAPI Initialize (char *Logpath)
+```
+
+
+
+
  
 
 Based on the requirement, any one or all classes can be used.And need to import those from the SDK.
