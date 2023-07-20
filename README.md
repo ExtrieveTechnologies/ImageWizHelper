@@ -76,529 +76,126 @@ This object reference will be used for all the imaging functionalities.
 
 C/C++ usage
 -------------
-1. **HandleWindowsApi** - *This function is used to initialize the DLL and validate the license. This function should
+1. **Initialize** - *This function is used to initialize the DLL and validate the license. This function should
 be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
 handle.*
  
- ```C/C++
- //C/C++
- HANDLE WINAPI Initialize (char *Logpath)
- ```
-
-
-Parameter Name
-
-1. **Logpath** - Pass a path with write acccess to the application. Debug logs are created in this path. This is
-   optional parameter. Debugging is not required then this can be kept as null.
-
-
- 
-
-Based on the requirement, any one or all classes can be used.And need to import those from the SDK.
-```java
-    import com.extrieve.quickcapture.sdk.*;
-    //OR : can import only required classes as per use cases.
-    import  com.extrieve.quickcapture.sdk.ImgHelper;  
-    import  com.extrieve.quickcapture.sdk.CameraHelper;
-    import  com.extrieve.quickcapture.sdk.Config;  
-    import  com.extrieve.quickcapture.sdk.ImgException;
-   ```
----
-## CameraHelper
-This core class will be implemented as an activity.This class can be initialized as intent.
-```java
-//JAVA
-CameraHelper CameraHelper = new CameraHelper();
-```
-```kotlin
-//Kotlin
-var cameraHelper: CameraHelper? = CameraHelper()
+```C/C++
+//C/C++
+HANDLE WINAPI Initialize (char *Logpath)
 ```
 
-With an activity call, triggering SDK for capture activity can be done.Most operations in **CameraHelper** is **activity based**.
+**Parameter Name**
 
-SDK having multiple flows as follows :
-	
-* **CAMERA_CAPTURE_REVIEW** - *Default flow. Capture with SDK Camera **->** review.*
-* **SYSTEM_CAMERA_CAPTURE_REVIEW** - *Capture with system default camera **->** review.*
-* **IMAGE_ATTACH_REVIEW** - *Attach/pass image **->** review.*
-  
+- **Logpath** - *Pass a path with write acccess to the application. Debug logs are created in this path. This is optional parameter.
+  Debugging is not required then this can be kept as null.*
 
-**1. CAMERA_CAPTURE_REVIEW** - *Default flow of the CameraHelper.Includes Capture with SDK Camera -> Review Image.*
+2. **Terminate** - *Each initialized handle should be terminated using this function.*
 
-```java
-//JAVA
-
-//Set CaptureMode as CAMERA_CAPTURE_REVIEW
-Config.CaptureSupport.CaptureMode = Config.CaptureSupport.CaptureModes.CAMERA_CAPTURE_REVIEW;
-//set permission for output path that set in config.
-UriphotoURI = Uri.parse(Config.CaptureSupport.OutputPath);
-this.grantUriPermission(this.getPackageName(),photoURI,Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);  
-
-//Create CameraIntent for CameraHelper activity call.
-Intent CameraIntent = new Intent(this,Class.forName("com.extrieve.quickcapture.sdk.CameraHelper"));
-if  (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP)  {
-	CameraIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-}
-//Call the Activity.
-startActivityForResult(CameraIntent,REQUEST_CODE_FILE_RETURN);
-
-//On activity result,recieve the captured, reviewed, cropped, optimised & compressed image colletion as array.
-@Override
-protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)  
-{
-	super.onActivityResult(requestCode,  resultCode,  data);
-	if  (requestCode == REQUEST_CODE_FILE_RETURN && resultCode == Activity.RESULT_OK)
-	{  
-		Boolean Status = (Boolean)data.getExtras().get("STATUS");
-		String Description = (String)data.getExtras().get("DESCRIPTION");  
-		if(Status == false){ 
-			//Failed  to  capture
-		}
-		finishActivity(REQUEST_CODE_FILE_RETURN); return;
-	}
-	FileCollection = (ArrayList<String>)data.getExtras().get("fileCollection");
-	//FileCollection //: will contains all capture images path as string
-	finishActivity(REQUEST_CODE_FILE_RETURN);
-}
-```
-```kotlin
-//Kotlin
-try {
-    /*DEV_HELP :redirecting to camera*/
-    val captureIntent = Intent(this, Class.forName("com.extrieve.quickcapture.sdk.CameraHelper"))
-    val photoURI = Uri.parse(Config.CaptureSupport.OutputPath)
-    grantUriPermission(
-	this.packageName, photoURI,
-	Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
-    )
-    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-	captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-    }
-    captureActivityResultLauncher!!.launch(captureIntent)
-} catch (ex: Exception) {
-    /*DEV_HELP : TODO : handle invalid Exception*/
-    Toast.makeText(this, "Failed to open camera  -" + ex.message, Toast.LENGTH_LONG).show()
-}
+```C/C++
+//C/C++
+int WINAPI Terminate(HANDLE ImgWizHlpHandle)
 ```
 
-**2. SYSTEM_CAMERA_CAPTURE_REVIEW** - *If user need to capture image with system default camera, this can be used.Includes Capture with system default camera -> Review*.
+**Parameter Name**
 
-```java
-//JAVA
+- **ImgWizHlpHandle** - *Handle created during initialization*
 
-//Set CaptureMode as SYSTEM_CAMERA_CAPTURE_REVIEW
-Config.CaptureSupport.CaptureMode = Config.CaptureSupport.CaptureModes.SYSTEM_CAMERA_CAPTURE_REVIEW;
-//set permission for output path that set in config.
-UriphotoURI = Uri.parse(Config.CaptureSupport.OutputPath);
-this.grantUriPermission(this.getPackageName(),photoURI,Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);  
+3. **CompressToTiff** - *This function will take array of input files and will create a single Tif output file. Support input as
+array of JPEG, PNG, bmp, & TIFF. By default DLL will select 200 as the standard DPI and A4 as the page size. It is recommended to
+keep a minimum of 150 as DPi to avoid Quality issues. Formats like DJvu, JBIG2 an data PDF are not supported. If input format is not
+supported it will return false.*
 
-//Create CameraIntent for CameraHelper activity call.
-Intent CameraIntent = new Intent(this,Class.forName("com.extrieve.quickcapture.sdk.CameraHelper"));
-if  (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP)  {
-	CameraIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-}
-//Call the Activity.
-startActivityForResult(CameraIntent,REQUEST_CODE_FILE_RETURN);
-
-//On activity result,recieve the captured, reviewed, cropped, optimised & compressed image colletion as array.
-@Override
-protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)  
-{
-	super.onActivityResult(requestCode,  resultCode,  data);
-	if  (requestCode == REQUEST_CODE_FILE_RETURN && resultCode == Activity.RESULT_OK)
-	{  
-		Boolean Status = (Boolean)data.getExtras().get("STATUS");
-		String Description = (String)data.getExtras().get("DESCRIPTION");  
-		if(Status == false){ 
-			//Failed  to  capture
-		}
-		finishActivity(REQUEST_CODE_FILE_RETURN); return;
-	}
-	FileCollection = (ArrayList<String>)data.getExtras().get("fileCollection");
-	//FileCollection //: will contains all capture images path as string
-	finishActivity(REQUEST_CODE_FILE_RETURN);
-}
-```
-```kotlin
-//Kotlin
-try {
-    /*DEV_HELP :redirecting to camera*/
-    val captureIntent = Intent(this, Class.forName("com.extrieve.quickcapture.sdk.CameraHelper"))
-    val photoURI = Uri.parse(Config.CaptureSupport.OutputPath)
-    grantUriPermission(
-	this.packageName, photoURI,
-	Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
-    )
-    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-	captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-    }
-    captureActivityResultLauncher!!.launch(captureIntent)
-} catch (ex: Exception) {
-    /*DEV_HELP : TODO : handle invalid Exception*/
-    Toast.makeText(this, "Failed to open camera  -" + ex.message, Toast.LENGTH_LONG).show()
-}
+```C/C++
+//C/C++
+INT32 WINAPI CompressToTIFF(HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char
+*Output_Filename , INT32 option )
 ```
 
-**3. IMAGE_ATTACH_REVIEW** - *If user need to review an image from device / gallery - this option can be used.After attach each image,review and all functionalities depends on review can be avail*.
+**Parameter Name**
 
-```java
-//JAVA
-
-//Set CaptureMode as IMAGE_ATTACH_REVIEW
-Config.CaptureSupport.CaptureMode = Config.CaptureSupport.CaptureModes.IMAGE_ATTACH_REVIEW;
-//Create/Convert/ get Image URI from image source.
-Uri ImgUri = data.getData();
-//Create ReviewIntent for CameraHelper activity call.
-Intent ReviewIntent = new Intent(this,Class.forName("com.extrieve.quickcapture.sdk.CameraHelper"));
-//Add the image URI to intent request with a key : ATTACHED_IMAGE.
-ReviewIntent.putExtra("ATTACHED_IMAGE", ImUri);
-//Call the Activity.
-startActivityForResult(ReviewIntent,REQUEST_CODE_FILE_RETURN);
-
-//On activity result,recieve the captured, reviewed, cropped, optimised & compressed image colletion as array.
-@Override
-protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)  
-{
-	super.onActivityResult(requestCode,  resultCode,  data);
-	if  (requestCode == REQUEST_CODE_FILE_RETURN && resultCode == Activity.RESULT_OK)
-	{  
-		Boolean Status = (Boolean)data.getExtras().get("STATUS");
-		String Description = (String)data.getExtras().get("DESCRIPTION");  
-		if(Status == false){ 
-			//Failed  to  capture
-		}
-		finishActivity(REQUEST_CODE_FILE_RETURN); return;
-	}
-	FileCollection = (ArrayList<String>)data.getExtras().get("fileCollection");
-	//FileCollection //: will contains all capture images path as string
-	finishActivity(REQUEST_CODE_FILE_RETURN);
-}
+- **ImgWizHlpHandle** - *Handle created using initialization*
+- **InputFile** - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
+- **InputFileCount** - *Number of files.*
+- **Output_Filename** - *Expected output file name with directory.*
+- **option** - *Following are the possible options: -*
+```C/C++
+//C/C++
+No_DPI_change = 0 NO
+ResetAllDPI = 1
+ResetZeroDPI = 2
 ```
-```kotlin
-//Kotlin
+*If only compression is to be performed then pass 0 as the option.*
+*If all images has to be resized to the standard page size then use **ResetAllDPI** option*
+*If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
 
-try {
-    /*DEV_HELP :redirecting to camera*/
-    val captureIntent = Intent(this, Class.forName("com.extrieve.quickcapture.sdk.CameraHelper"))
-    val photoURI = Uri.parse(Config.CaptureSupport.OutputPath)
-    grantUriPermission(
-	this.packageName, photoURI,
-	Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
-    )
-    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-	captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-    }
-    captureActivityResultLauncher!!.launch(captureIntent)
-} catch (ex: Exception) {
-    /*DEV_HELP : TODO : handle invalid Exception*/
-    Toast.makeText(this, "Failed to open camera  -" + ex.message, Toast.LENGTH_LONG).show()
-}
-```
-## Confg
-SDK included a supporting class with static configuration - which includes all configurations related to SDK.Confg contains a sub configuration collection **CaptureSupport** - contains all the Capture & review related configurations.
-Config.CaptureSupport  :  contains various configurations as follows:
+4. **CompressToPDF** - *This function will take array of input files and create a single PDF output file. Support input as array of JPEG,
+PNG, bmp, & TIFF. By default DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep minimum of 150 DPI
+to avoid quality issues. Formats like DJvu, JBIG2 and data PDF are not suported. If input format is not supported it will return false.*
 
-- **OutputPath** - To set the output directory in which the captured images will be saved.Base app should have rights to write to the provided path.
-	```java
- 	//JAVA
-	Config.CaptureSupport.OutputPath = "pass output path sd string";
-	```
-	```kotlin
- 	//Kotlin
-	Config!!.CaptureSupport!!.OutputPath = "pass output path sd string";
-	```
-- **MaxPage** - To set the number of captures to do on each camera session. And this can also control whether the capture mode is single  or multi i.e :
-	> if  MaxPage  <= 0 /  not  set:  means  unlimited.If  MaxPage  >= 1:
-	> means  limited.
-	```java
-	//JAVA
-	// MaxPage <= 0  : Unlimited Capture Mode  
-	// MaxPage = 1   : Limited Single Capture  
-	// MaxPage > 1   : Limited Multi Capture Mode  
-	Config.CaptureSupport.MaxPage = 0;
-	```
-	```java
-	//Kotlin
-	// MaxPage <= 0  : Unlimited Capture Mode  
-	// MaxPage = 1   : Limited Single Capture  
-	// MaxPage > 1   : Limited Multi Capture Mode  
-	Config!!.CaptureSupport!!.MaxPage = 0;
-	```
-- **ColorMode**  -  To Set the capture color mode - supporting color and grayscale.
-	```java
-	//JAVA
-	Config.CaptureSupport.ColorMode = Config.CaptureSupport.ColorModes.RBG;
-	//RBG (1) - Use capture flow in color mode.
-	//GREY (2) - Use capture flow in grey scale mode.
-	```
-	```kotlin
-	//Kotlin
-	Config!!.CaptureSupport!!.ColorMode = Config!!.CaptureSupport!!.ColorModes!!.RBG;
-	//RBG (1) - Use capture flow in color mode.
-	//GREY (2) - Use capture flow in grey scale mode.
-	```
-- **EnableFlash**  -  Enable Document capture specific flash control for SDK camera.
-	```java
-	//JAVA
-	Config.CaptureSupport.EnableFlash = true;
-	```
-	```kotlin
-	//Kotlin
-	Config!!.CaptureSupport!!.EnableFlash = true;
-	```
-- **CaptureSound**  -  To Enable camera capture sound.
-	```java
-	//JAVA
-	Config.CaptureSupport.CaptureSound = true;
-	```
-	```kotlin
-	//Kotlin
-	Config!!.CaptureSupport!!.CaptureSound = true;
-	```
-- **DeviceInfo** - Will share all general information about the device.
-	```java
-	//JAVA
-	Config.CaptureSupport.DeviceInfo;
-	```
-	```kotlin
-	//Kotlin
-	Config!!.CaptureSupport!!.DeviceInfo;
-	```
-- **SDKInfo**  - Contains all version related information on SDK.
-	```java
-	//JAVA
-	Config.CaptureSupport.SDKInfo;
-	```
-	```kotlin
-	//Kotlin
-	Config!!.CaptureSupport!!.SDKInfo;
-	```
-
-- **CameraToggle**  -  Toggle  camera  between  front  and  back.
-	```java
-	//JAVA
-	 Config.CaptureSupport.CameraToggle = CameraToggleType.ENABLE_BACK_DEFAULT;
-	//DISABLED (0) -Disable camera toggle option.
-	//ENABLE_BACK_DEFAULT (1) - Enable camera toggle option with Front camera by default.
-	//ENABLE_FRONT_DEFAULT (2) - Enable camera toggle option with Back camera  by default.
-	```
-	```kotlin
-	//Kotlin
-	 Config!!.CaptureSupport!!.CameraToggle = CameraToggleType!!.ENABLE_BACK_DEFAULT;
-	//DISABLED (0) -Disable camera toggle option.
-	//ENABLE_BACK_DEFAULT (1) - Enable camera toggle option with Front camera by default.
-	//ENABLE_FRONT_DEFAULT (2) - Enable camera toggle option with Back camera  by default.
-	```
-## ImgHelper
-Following are the options/methods available from class **ImgHelper** :
-```java
-//JAVA
-ImgHelper ImageHelper = new ImgHelper(this);
-```
-```kotlin
-//Kotlin
-var ImageHelper: ImgHelper? = ImgHelper(this)
-```
-- ***SetImageQuality*** - *Set the Quality of the image, Document_Qualityisused.If documents are used further for any automations and OCR, use Document_Quality.*
-	 >*Available Image Qualities* :
-		1. Photo_Quality.
-		2. Document_Quality.
-		3. Compressed_Document.
-		
-	```java
-	//JAVA
-	ImageHelper.SetImageQuality(ImgHelper.ImageQuality.Photo_Quality.ordinal());
-	//--------------------------
-	ImageHelper.SetImageQuality(1);//0,1,2 - Photo_Quality, Document_Quality, Compressed_Document
-	```
- 	```kotlin
-  	//Kotlin
-	imageHelper!!.SetImageQuality(1)
-	```
-- ***SetPageLayout*** - *Set the Layout for the images generated/processed by the system.*
-	```java
- 	//JAVA
-	ImageHelper.SetPageLayout(ImgHelper.LayoutType.A4.ordinal());
-	//--------------------------
-	ImageHelper.SetPageLayout(4);//A1-A7(1-7),PHOTO,CUSTOM,ID(8,9,10)
-	```
- 	```kotlin
-  	//Kotlin
-	imageHelper!!.SetPageLayout(4)
-	```
-	 >*Available layouts* : A1, A2, A3, **A4**, A5, A6, A7,PHOTO & CUSTOM
-	 
-	*A4 is the most recommended layout for document capture scenarios.*
-	 
-- ***SetDPI*** - *Set DPI(depth per inch) for the image.*
-	```java
- 	//JAVA
-	ImageHelper.SetDPI(ImgHelper.DPI.DPI_200.ordinal());
-	//--------------------------
-	ImageHelper.SetDPI(200);//int dpi_val = 150, 200, 300, 500, 600;
-	```
-	```kotlin
-	//Kotlin
-	imageHelper!!.SetDPI(200)
-	```
-	 >*Available DPI* : DPI_150, DPI_200, DPI_300, DPI_500, DPI_600
-	 
-	 *150 & 200 DPI is most used.And 200 DPI recommended for OCR and other image extraction prior to capture.*
-	 
-- ***GetThumbnail*** - *This method Will build thumbnail for the given image in custom width,height & AspectRatio.*
-	```java
- 	//JAVA
-	Bitmap thumb = ImageHelper.GetThumbnail(ImageBitmap, 600, 600, true);
-	/*
-	Bitmap GetThumbnail(
-		@NonNull  Bitmap bm,
-	    int reqHeight,
-	    int reqWidth,
-	    Boolean AspectRatio )throws ImgException.
-	*/
-	```
-	```kotlin
-	//KOTLIN
-	var thumb = ImageHelper!!.GetThumbnail(ImageBitmap, 600, 600, true);
-
-	```
-- ***CompressToJPEG*** - *This method will Compress the provided bitmap image and will save to given path..*
-	```java
-	//JAVA
-
-	Boolean Iscompressed = ImageHelper.CompressToJPEG(bitmap,outputFilePath);
-	/*
-	Boolean CompressToJPEG(Bitmap bm,String outputFilePath)
-		throws ImgException
-
-	*/
-	```
- 	```kotlin
-	//KOTLIN
-	var thumb = ImageHelper!!.CompressToJPEG(bitmap, outputFilePath);
-
-	```
-	
-- ***rotateBitmap*** - *This method will rotate the image to preferred orientation.*
-	 ```java
-	//JAVA
-	Bitmap rotatedBm = ImageHelper.rotateBitmapDegree(nBm, RotationDegree);
-	/*
-	Bitmap rotateBitmapDegree(Bitmap bitmap,int Degree)
-		throws ImgException
-	*/
-	```
-  	```kotlin
-	//KOTLIN
-	var thumb = ImageHelper!!.rotateBitmapDegree(bitmap, RotationDegree);
-
-	```
-- **GetTiffForLastCapture** - Build Tiff file output file from last captured set of images.
-	```java
- 	//JAVA
-	ImageHelper.GetTiffForLastCapture(outPutFileWithpath);
-	//on success, will respond with string : "SUCCESS:::TiffFilePath";
-	//use  ":::"  char.  key  to  split  the  response.
-	//on failure,will respond with string : "FAILED:::Reason for failure";
-	//use ":::" char. key to split the response.
-	//on failure, error details can collect from CameraSupport.CamConfigClass.LastLogInfo
-	```
-	```kotlin
-	//KOTLIN
-	var thumb = ImageHelper!!.GetTiffForLastCapture(outPutFileWithpath);
-
-	```
-- **GetPDFForLastCapture**  -  Build  PDF  file  output  file  from  last  captured  set  of  images.
-	```java
- 	//JAVA
-	ImageHelper.GetPDFForLastCapture(outPutFileWithpath);
-	//on success, will respond with string : "SUCCESS:::PdfFilePath";
-	//use  ":::"  char.  key  to  split  the  response.
-	//on failure,will respond with string : "FAILED:::Reason for failure";
-	//use ":::" char. key to split the response.
-	//on failure, error details can collect from CameraSupport.CamConfigClass.LastLogInfo
-	```
- 	```kotlin
-	//KOTLIN
-	var thumb = ImageHelper!!.GetPDFForLastCapture(outPutFileWithpath);
-
-	```
-- **BuildTiff**  - Build .tiff  file  output from the list  of  images shared.
-	```java
- 	//JAVA
-	ImageHelper.BuildTiff(ImageCol,OutputTiffFilePath);
-	*@param "Image File path collection as ArrayList<String>".
- 	*@param "Output Tiff FilePath as String".
-	*@return on failure = "FAILED:::REASON" || on success = "SUCCESS:::TIFF file path".
-	```
- 	```kotlin
-	//KOTLIN
-	var thumb = ImageHelper!!.BuildTiff(ImageCol,OutputTiffFilePath);
-
-	```
-- **BuildPDF**  - Build PDF file output file from last captured set of images.
-	```java
-	//JAVA
-	ImageHelper.BuildPDF(ImageCol,outPutPDFFileWithpath);
-	*@param  "Image File path collection as ArrayList<String>"
- 	*@param "Output Tiff FilePath as String".
-	*@return  on failure = "FAILED:::REASON" || on success = "SUCCESS:::PDF file path".
-	```
-	```kotlin
-	//KOTLIN
-	var thumb = ImageHelper!!.BuildPDF(ImageCol,OutputTiffFilePath);
-
-	```
-
-## ImgException 
-As a part of exceptional error handling **ImgException** class is available.
-- *Following are the possible errors and corresponding codes*:
-	- CREATE_FILE_ERROR= **-100**;
-	- IMAGE_ROTATION_ERROR= **-101**;
-	- LOAD_TO_BUFFER_ERROR= **-102**;
-	- DELETE_FILE_ERROR= **-103**;
-	- GET_ROTATION_ERROR= **-104**;
-	- ROTATE_BITMAP_ERROR= **-105**;
-	- BITMAP_RESIZE_ERROR= **-106**;
-	- CAMERA_HELPER_ERROR= **-107**;
-	- LOG_CREATION_ERROR= **-108**;
-	
-## SDK Licensing
-
-*License file provided that should keep inside assets folder of main application and call UnlockImagingLibrary from ImgHelper class to unlock the SDK.*
-> **QuickCapture** SDK is absolutely **free** to use.But for image operations on enterprise use cases, license required.
-> [Click for license details ](https://www.extrieve.com/mobile-document-scanning/)
-
-```java
-//JAVA
-	
-//Read lic asset file locally or provide a file url
-// eg : String licData = readAssetFile("com.extrieve.lic", this);  
-//Pass liscence data to UnlockImagingLibrary method on object(imageHelper) of ImgHelper class.
-Boolean IsUnlocked = ImageHelper.UnlockImagingLibrary(licData)
-
-/*
-boolean UnlockImagingLibrary(String licenseFileData)
-	throws Exception
-*/
-
+```C/C++
+//C/C++
+int WINAPI CompressToPDF (HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char
+*Output_Filename, int option )
 ```
 
-```kotlin
-//KOTLIN
+**Parameter Name**
 
-//Read lic asset file locally or provide a file url
-// eg : String licData = readAssetFile("com.extrieve.lic", this);  
-//Pass liscence data to UnlockImagingLibrary method on object(imageHelper) of ImgHelper class.
-val isUnlocked: Boolean = imageHelper!!.UnlockImagingLibrary(licData)
+- **ImgWizHlpHandle** - *Handle created using initialization*
+- **InputFile** - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
+- **InputFileCount** - *Number of files.*
+- **Output_Filename** - *Expected output file name with directory.*
+- **option** - *Following are the possible options: -*
+```C/C++
+//C/C++
+No_DPI_change = 0 NO
+ResetAllDPI = 1
+ResetZeroDPI = 2
+```
+*If only compression is to be performed then pass 0 as the option.*
+*If all images has to be resized to the standard page size then use **ResetAllDPI** option*
+*If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
 
-/*
-boolean UnlockImagingLibrary(String licenseFileData)
-	throws Exception
-*/
+5. **CompressToJpeg** - *This function will compress as single input file and create a Jpeg output file.*
 
+```C/C++
+//C/C++
+int WINAPI CompressToJpeg(HANDLE ImgWizHlpHandle , char **InputFile , char *Output_Directory, int
+option)
 ```
 
-	
-[© 1996 - 2023 Extrieve Technologies](https://www.extrieve.com/)
+**Parameter Name**
+
+- **ImgWizHlpHandle** - *Handle created using initialization*
+- **InputFile** - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
+- **Output_Directory** - *Expected output directory.*
+- **option** - *Following are the possible options: -*
+```C/C++
+//C/C++
+No_DPI_change = 0 
+ResetAllDPI = 1
+ResetZeroDPI = 2
+```
+*If only compression is to be performed then pass 0 as the option.*
+*If all images has to be resized to the standard page size then use **ResetAllDPI** option*
+*If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
+
+6. **AppendToTiff** - This function will append a tiff image over an existing tiff image.
+
+**Parameter Name**
+
+- **ImgWizHlpHandle** - *Handle created using initialization*
+- **InputFile** - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
+- **Output_File** - *Expected output file name with directory.*
+- **option** - *Following are the possible options: -*
+```C/C++
+//C/C++
+No_DPI_change = 0 NO
+ResetAllDPI = 1
+ResetZeroDPI = 2
+```
+*If only compression is to be performed then pass 0 as the option.*
+*If all images has to be resized to the standard page size then use **ResetAllDPI** option*
+*If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
+
+
