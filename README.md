@@ -75,7 +75,7 @@ C/C++ usage
     be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
     handle.*
      
-    ```C/C++
+    ``` C/ C++
     //C/C++
     HANDLE WINAPI Initialize (char *Logpath)
     ```
@@ -85,7 +85,7 @@ C/C++ usage
 
 2. **Terminate** - *Each initialized handle should be terminated using this function.*
 
-    ```C/C++
+    ```C / C++
     //C/C++
     int WINAPI Terminate(HANDLE ImgWizHlpHandle)
     ```
