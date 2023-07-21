@@ -95,11 +95,11 @@ C/C++ usage
    ResetAllDPI = 1
    ResetZeroDPI = 2
    ```
-   *If only compression is to be performed then pass 0 as the option.*
-   *If all images has to be resized to the standard page size then use **ResetAllDPI** option*
-   *If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
+   - *If only compression is to be performed then pass 0 as the option.*
+   - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
+   - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-4. **CompressToPDF** - *This function will take array of input files and create a single PDF output file. Support input as array of JPEG,PNG, bmp, & TIFF. By default DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep minimum of 150 DPI to avoid quality issues. Formats like DJvu, JBIG2 and data PDF are not suported. If input format is not supported it will return false.*
+4. **CompressToPDF** - *This function will take an array of input files and create a single PDF output file. Support input as an array of JPEG, PNG, BMP, & TIFF. By default, DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep a minimum of 150 DPI to avoid quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input format is not supported it will return false.*
    
    ```C / C++
    //C/C++
@@ -120,11 +120,11 @@ C/C++ usage
    ResetAllDPI = 1
    ResetZeroDPI = 2
    ```
-   *If only compression is to be performed then pass 0 as the option.*
-   *If all images has to be resized to the standard page size then use **ResetAllDPI** option*
-   *If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
+   - *If only compression is to be performed then pass 0 as the option.*
+   - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
+   - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-5. **CompressToJpeg** - *This function will compress as single input file and create a Jpeg output file.*
+5. **CompressToJpeg** - *This function will compress as a single input file and create a Jpeg output file.*
 
    ```C / C++
    //C/C++
@@ -135,7 +135,7 @@ C/C++ usage
    **Parameter Name**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile** - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
+   - **InputFile** - *Array on input files. In case of multipage TIFF, all pages will be considered as input. This should be with full path.*
    - **Output_Directory** - *Expected output directory.*
    - **option** - *Following are the possible options: -*
    ```C/C++
@@ -145,8 +145,8 @@ C/C++ usage
    ResetZeroDPI = 2
    ```
    *If only compression is to be performed then pass 0 as the option.*
-   *If all images has to be resized to the standard page size then use **ResetAllDPI** option*
-   *If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
+   *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
+   *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
 6. **AppendToTiff** - *This function will append a tiff image over an existing tiff image.*
 
@@ -158,7 +158,7 @@ C/C++ usage
    **Parameter Name**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile** - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
+   - **InputFile** - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
    - **Output_File** - *Expected output file name with directory.*
    - **option** - *Following are the possible options: -*
    ```C / C++
@@ -167,10 +167,37 @@ C/C++ usage
    ResetAllDPI = 1
    ResetZeroDPI = 2
    ```
-   *If only compression is to be performed then pass 0 as the option.*
-   *If all images has to be resized to the standard page size then use **ResetAllDPI** option*
-   *If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
+   - *If only compression is to be performed then pass 0 as the option.*
+   - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
+   - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-7. **OCRBWConversionToTiff** - 
+7. **OCRBWConversionToTiff** - This function will take single input files and create a Black and White output file. Which will be mainly helpful
+   for OCR purposes.The supported input file of type JPEg, BMP, and TIFF. By default, DLL will select 200 as the standard DPI & A4 as the page size.
+   It is recommended to keep a minimum of 150 as DPI to avoid Quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input format
+   is not supported it will return false.
 
+   ```C / C++
+   //C/C++
+   INT32 OCRBWConversionToTiff(HANDLE ImgWizHlpHandle, char *InputFile, INT32 PageNo, char*Output_Filename , INT32 option )
+   ```
+
+    **Parameter Name**
+   
+   - **ImgWizHlpHandle** - *Handle created using initialization*
+   - **InputFile** - *Single input file Image or PDF*
+   - **PageNo** - *Page Number of the input file. This is mainly required for input file type TIFF and PDF. For other types of images, we can send 0*
+   - **Output_Filename** - *Expected output file name with directory.*
+   - **option** - *Following are the possible options: -*
+   ```C / C++
+   //C/C++
+   No_DPI_change = 0 NO
+   ResetAllDPI = 1
+   ResetZeroDPI = 2
+   ```
+   - *If only compression is to be performed then pass 0 as the option.*
+   - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
+   - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
+
+   
+   
 
