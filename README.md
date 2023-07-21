@@ -50,26 +50,26 @@ This object reference will be used for all the imaging functionalities.
 C/C++ usage
 -------------
 1. **Initialize** - *This function is used to initialize the DLL and validate the license. This function should
-    be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
-    handle.*
+   be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
+   handle.*
      
-    ``` C/ C++
-    //C/C++
-    HANDLE WINAPI Initialize (char *Logpath)
-    ```
-    **Parameter Name**
-    - **Logpath** - *Pass a path with write acccess to the application. Debug logs are created in this path. This is optional parameter.
+   ``` C/ C++
+   //C/C++
+   HANDLE WINAPI Initialize (char *Logpath)
+   ```
+   **Parameter Name**
+   - **Logpath** - *Pass a path with write acccess to the application. Debug logs are created in this path. This is optional parameter.
       Debugging is not required then this can be kept as null.*
 
 2. **Terminate** - *Each initialized handle should be terminated using this function.*
 
-    ```C / C++
-    //C/C++
-    int WINAPI Terminate(HANDLE ImgWizHlpHandle)
-    ```
+   ```C / C++
+   //C/C++
+   int WINAPI Terminate(HANDLE ImgWizHlpHandle)
+   ```
     
-    **Parameter Name**
-    - **ImgWizHlpHandle** - *Handle created during initialization*
+   **Parameter Name**
+   - **ImgWizHlpHandle** - *Handle created during initialization*
 
 3. **CompressToTiff** - *This function will take array of input files and will create a single Tif output file. Support input as
    array of JPEG, PNG, bmp, & TIFF. By default DLL will select 200 as the standard DPI and A4 as the page size. It is recommended to
@@ -89,6 +89,7 @@ C/C++ usage
    - **InputFileCount**  - *Number of files.*
    - **Output_Filename** - *Expected output file name with directory.*
    - **option** - *Following are the possible options: -*
+     
    ```C/C++
    //C/C++
    No_DPI_change = 0 NO
@@ -99,7 +100,9 @@ C/C++ usage
    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-4. **CompressToPDF** - *This function will take an array of input files and create a single PDF output file. Support input as an array of JPEG, PNG, BMP, & TIFF. By default, DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep a minimum of 150 DPI to avoid quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input format is not supported it will return false.*
+4. **CompressToPDF** - *This function will take an array of input files and create a single PDF output file. Support input as an array of JPEG, PNG, BMP, & TIFF. By 
+   default, DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep a minimum of 150 DPI to avoid quality issues. Formats like DJvu, 
+   JBIG2, and data PDF are not supported. If input format is not supported it will return false.*
    
    ```C / C++
    //C/C++
@@ -181,7 +184,7 @@ C/C++ usage
    INT32 OCRBWConversionToTiff(HANDLE ImgWizHlpHandle, char *InputFile, INT32 PageNo, char*Output_Filename , INT32 option )
    ```
 
-    **Parameters**
+   **Parameters**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
    - **InputFile**       - *Single input file Image or PDF*
@@ -226,7 +229,7 @@ C/C++ usage
    
    Following are the different Layout types supported
 
-    ```C / C++
+   ```C / C++
    //C/C++
    typedef enum
    {
@@ -253,20 +256,20 @@ C/C++ usage
     //C/C++
     int WINAPI SetDPI(HANDLE ImgWizHlpHandle, DPI dpi)
     ``` 
-   **Following are the possible DPI supported**
+    **Following are the possible DPI supported**
     
-   ```C / C++
-   //C/C++
-   typedef enum
-   {
-    DPI_100 = 100,
-    DPI_150 = 150,
-    DPI_200 = 200,
-    DPI_300 = 300,
-    DPI_500 = 500,
-    DPI_600 = 600
-   } DPI;
-   ``` 
+    ```C / C++
+    //C/C++
+    typedef enum
+    {
+     DPI_100 = 100,
+     DPI_150 = 150,
+     DPI_200 = 200,
+     DPI_300 = 300,
+     DPI_500 = 500,
+     DPI_600 = 600
+    } DPI;
+    ``` 
 
 12. **GetDPI** - *This function will return the existing DPi setup.*
 
@@ -348,26 +351,26 @@ C/C++ usage
     - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
     - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-18.  **GetErrorDescription** - This method will return the error string for a specific error code.
+18. **GetErrorDescription** - This method will return the error string for a specific error code.
 
-     **Error Description for respective error code return**
+    **Error Description for respective error code return**
 
-     - ERR_INAVLID_EDITOR_HANDLE = 1 // "Invalid Editor Handle"
-     - ERR_INVALID_IMAGE_HANDLE = 2 // "Invalid Image Handle"
-     - ERR_INVALID_MULTIIMG_HANDLE = 3 // "Invalid MultiImage Handle"
-     - ERR_NO_MEMORY = 12 // "Memory is not available"
-     - ERR_FILE_OPEN = 13 // "File open error"
-     - ERR_FILE_WRITE = 14 // "File writing error"
-     - ERR_FILE_ACCESS = 15 // "File access error"
-     - ERR_FILE_NOT_FOUND = 16 // "File Not Found"
-     - ERR_FILE_ALREADY_EXIST = 17 // "File Already Exists"
-     - ERR_INVAL_PARAM = 18 // "Invalid input parameter"
-     - ERR_PAGE_NUMBER = 19 // "Invalid Page Number"
-     - ERR_FMT_NOT_SUPPORTED =20 // "Invalid input file format"
-     - ERR_DATA_PDF = 21 // "Input PDF file is data PDF file"
-     - ERR_PDF_READING = 22 // "Error in PDF Reading"
-     - ERR_PDF_WRITING = 23 // "Error in PDF writing"
-     - ERR_LIMAGING = 24 // "Error from Image Library"
-     - ERR_EXIF_FAILED = 25 // "Error in reading exif information"
+    - ERR_INAVLID_EDITOR_HANDLE = 1 // "Invalid Editor Handle"
+    - ERR_INVALID_IMAGE_HANDLE = 2 // "Invalid Image Handle"
+    - ERR_INVALID_MULTIIMG_HANDLE = 3 // "Invalid MultiImage Handle"
+    - ERR_NO_MEMORY = 12 // "Memory is not available"
+    - ERR_FILE_OPEN = 13 // "File open error"
+    - ERR_FILE_WRITE = 14 // "File writing error"
+    - ERR_FILE_ACCESS = 15 // "File access error"
+    - ERR_FILE_NOT_FOUND = 16 // "File Not Found"
+    - ERR_FILE_ALREADY_EXIST = 17 // "File Already Exists"
+    - ERR_INVAL_PARAM = 18 // "Invalid input parameter"
+    - ERR_PAGE_NUMBER = 19 // "Invalid Page Number"
+    - ERR_FMT_NOT_SUPPORTED =20 // "Invalid input file format"
+    - ERR_DATA_PDF = 21 // "Input PDF file is data PDF file"
+    - ERR_PDF_READING = 22 // "Error in PDF Reading"
+    - ERR_PDF_WRITING = 23 // "Error in PDF writing"
+    - ERR_LIMAGING = 24 // "Error from Image Library"
+    - ERR_EXIF_FAILED = 25 // "Error in reading exif information"
 
      
