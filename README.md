@@ -1,33 +1,11 @@
-# ImageWizHelper
+# ImageWizHelper - Imaging SDK from Extrieve
 <img src="https://raw.githubusercontent.com/ExtrieveTechnologies/ImageWizHelper/main/ImageWizHelper_v2.gif" alt="img-verification" autoplay>
-ImageWizHelper - Imaging SDK from Extrieve
-
-<img class="img-fluid" align="center" src="https://github.com/ExtrieveTechnologies/QuickCapture/blob/main/QuickCapture.png?raw=true" width="30%" alt="img-verification">
-
-## Document Scanning-Capture SDK ANDROID v3
-QuickCapture Mobile Scanning SDK Specially designed for native ANDROID from [Extrieve](https://www.extrieve.com/).
-
-> It's not "**just**" a scanning SDK. It's a "**document**" scanning/capture SDK evolved with **Best Quality**, **Highest Possible Compression**, **Image Optimisation**, of output document in mind.
 
 > **Developer-friendly** & **Easy to integration** SDK.
 
-*Choose the **right** version that suits your need* :
-- [**QuickCapture v2**](https://github.com/ExtrieveTechnologies/QuickCapture_Android/tree/QuickCapture-V2#document-scanning-capture-sdk-android-v2): Optimized capture functionality, designed to be as compact as possible [~ **2 MB**].
-- [**QuickCapture v3**](https://github.com/ExtrieveTechnologies/QuickCapture_Android/tree/QuickCapture-V3#document-scanning-capture-sdk-android-v3): Comprehensive & advanced **AI** functionalities, **comparatively bit** larger size [~ **20 MB**].
-
-> **End of support Notice** :  QuickCapture SDK Android **V1** deprecated by Dec. 2022.For any further updates and support, can use **V2**
-> which having no major modifications.But with improved funcionalities,feature additions and fixes.
-
-[Refer here for **V2 documentation** and samples](https://github.com/ExtrieveTechnologies/QuickCapture_Android/tree/QuickCapture-V2#mobile-document-scanning-sdk-android-v2)
-
-### Other available platform options
-- [iOS](https://github.com/ExtrieveTechnologies/QuickCapture_IOS)
-- [Fultter Plugin](https://pub.dev/packages/quickcapture)
-- [Web SDK](https://github.com/ExtrieveTechnologies/QuickCapture_WEB)
-
 Download
 --------
-You can download the **.aar** library file from GitHub's [releases page](https://github.com/ExtrieveTechnologies/QuickCapture_Android/releases/) and add the file dependency manually into the project/app.
+You can download the SDK file from GitHub's [releases page](https://github.com/ExtrieveTechnologies/QuickCapture_Android/releases/) and add the file dependency manually into the project/app.
 
 
 Compatibility
