@@ -356,9 +356,9 @@ C/C++ usage
 
     **Error Description for respective error code return**
 
-    - ERR_INAVLID_EDITOR_HANDLE = 1 // "Invalid Editor Handle"
-    - ERR_INVALID_IMAGE_HANDLE = 2 // "Invalid Image Handle"
-    - ERR_INVALID_MULTIIMG_HANDLE = 3 // "Invalid MultiImage Handle"
+    - ERR_INAVLID_EDITOR_HANDLE = **1** // "Invalid Editor Handle"
+    - ERR_INVALID_IMAGE_HANDLE = **2** // "Invalid Image Handle"
+    - ERR_INVALID_MULTIIMG_HANDLE = **3** // "Invalid MultiImage Handle"
     - ERR_NO_MEMORY = 12 // "Memory is not available"
     - ERR_FILE_OPEN = 13 // "File open error"
     - ERR_FILE_WRITE = 14 // "File writing error"
