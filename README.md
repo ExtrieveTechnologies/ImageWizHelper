@@ -348,4 +348,8 @@ C/C++ usage
    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-    
+18.  **GetErrorDescription** - This method will return the error string for a specific error code.
+
+     **Error Description for respective error code return**
+
+     
