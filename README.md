@@ -148,7 +148,12 @@ C/C++ usage
    *If all images has to be resized to the standard page size then use **ResetAllDPI** option*
    *If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
 
-6. **AppendToTiff** - This function will append a tiff image over an existing tiff image.
+6. **AppendToTiff** - *This function will append a tiff image over an existing tiff image.*
+
+   ```C / C++
+   //C/C++
+   int WINAPI AppendToTiff(HANDLE ImgWizHlpHandle , char *InputFile , char *OutputFile, int option)
+   ```
 
    **Parameter Name**
    
@@ -165,5 +170,7 @@ C/C++ usage
    *If only compression is to be performed then pass 0 as the option.*
    *If all images has to be resized to the standard page size then use **ResetAllDPI** option*
    *If only mobile captured images to be resized then keep **ResetZeroDPI** as the parameter.*
+
+7. **OCRBWConversionToTiff** - 
 
 
