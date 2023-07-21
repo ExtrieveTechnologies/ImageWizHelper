@@ -82,7 +82,7 @@ C/C++ usage
    *Output_Filename , INT32 option )
    ```
    
-   **Parameter Name**
+   **Parameters**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
    - **InputFile**       - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
@@ -107,7 +107,7 @@ C/C++ usage
    *Output_Filename, int option )
    ```
    
-   **Parameter Name**
+   **Parameters**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
    - **InputFile**       - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
@@ -132,7 +132,7 @@ C/C++ usage
    option)
    ```
    
-   **Parameter Name**
+   **Parameters**
    
    - **ImgWizHlpHandle**  - *Handle created using initialization*
    - **InputFile**        - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
@@ -155,7 +155,7 @@ C/C++ usage
    int WINAPI AppendToTiff(HANDLE ImgWizHlpHandle , char *InputFile , char *OutputFile, int option)
    ```
 
-   **Parameter Name**
+   **Parameters**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
    - **InputFile**       - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
@@ -181,7 +181,7 @@ C/C++ usage
    INT32 OCRBWConversionToTiff(HANDLE ImgWizHlpHandle, char *InputFile, INT32 PageNo, char*Output_Filename , INT32 option )
    ```
 
-    **Parameter Name**
+    **Parameters**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
    - **InputFile**       - *Single input file Image or PDF*
@@ -205,7 +205,7 @@ C/C++ usage
    int WINAPI SetLogFile(HANDLE ImgWizHlpHandle , char *error_log_file, int log_level, int *error)
    ```
 
-   **Parameter Name**
+   **Parameters**
 
    - **ImgWizHlpHandle** - *Handle created using initialization.*
    - **error_log_file**  - *Error log file name with full path*
@@ -317,5 +317,35 @@ C/C++ usage
     //C/C++
     int WINAPI GetConvertion(HANDLE ImgWizHlpHandle, ConvertionType Convertion)
     ```
+    
+19. **CompressPagesToTiff_Array** - *This function will take a single input file and take the file's pages in an array to compress those pages in a
+    single output.*
+
+    It will also take an ArrayLenght of pages also.
+
+    It is recommended to keep a minimum of 150 as DPI to avoid Quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input
+    format is not supported it will not return to 0.
+
+    For successful compression, it will return 0.
+
+    **Parameters**
+
+    - **ImgWizHlpHandle** - *Handle created using initialization.*
+    - **InputFile**       - *Single input file Image.*
+    - **OutputFile**      - *Expected output file name with directory*
+    - **PageArray**       - *Expected page number in an array to compress.*
+    - **PageArrayCount**  - *Array length*
+    - **Append**          - *Boolean value (true/false), which helps to use a single output file while Multiple Compression operations.*
+    - **option**          - *Following are the possible options: -*
+    ```C / C++
+    //C/C++
+    No_DPI_change = 0 NO
+    ResetAllDPI = 1
+    ResetZeroDPI = 2
+    ```
+    
+   - *If only compression is to be performed then pass 0 as the option.*
+   - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
+   - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
     
