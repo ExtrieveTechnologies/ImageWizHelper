@@ -98,7 +98,7 @@ C/C++ usage
    keep a minimum of 150 as DPi to avoid Quality issues. Formats like DJvu, JBIG2 an data PDF are not supported. If input format is not
    supported it will return false.*
    
-   ```C/C++
+   ```C / C++
    //C/C++
    INT32 WINAPI CompressToTIFF(HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char
    *Output_Filename , INT32 option )
@@ -123,7 +123,7 @@ C/C++ usage
 
 4. **CompressToPDF** - *This function will take array of input files and create a single PDF output file. Support input as array of JPEG,PNG, bmp, & TIFF. By default DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep minimum of 150 DPI to avoid quality issues. Formats like DJvu, JBIG2 and data PDF are not suported. If input format is not supported it will return false.*
    
-   ```C/C++
+   ```C / C++
    //C/C++
    int WINAPI CompressToPDF (HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char
    *Output_Filename, int option )
@@ -148,7 +148,7 @@ C/C++ usage
 
 5. **CompressToJpeg** - *This function will compress as single input file and create a Jpeg output file.*
 
-   ```C/C++
+   ```C / C++
    //C/C++
    int WINAPI CompressToJpeg(HANDLE ImgWizHlpHandle , char **InputFile , char *Output_Directory, int
    option)
@@ -178,7 +178,7 @@ C/C++ usage
    - **InputFile** - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
    - **Output_File** - *Expected output file name with directory.*
    - **option** - *Following are the possible options: -*
-   ```C/C++
+   ```C / C++
    //C/C++
    No_DPI_change = 0 NO
    ResetAllDPI = 1
