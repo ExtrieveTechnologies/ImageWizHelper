@@ -245,8 +245,77 @@ C/C++ usage
    ```C / C++
    //C/C++
    int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
+   ```
+
+12. **SetDPI** - *By default DLL will use 200 DPI as the output DPI. This parameter can be used to change the DPI.*
+     
+    ```C / C++
+    //C/C++
+    int WINAPI SetDPI(HANDLE ImgWizHlpHandle, DPI dpi)
+    ``` 
+   **Following are the possible DPI supported**
+    
+   ```C / C++
+   //C/C++
+   typedef enum
+   {
+    DPI_100 = 100,
+    DPI_150 = 150,
+    DPI_200 = 200,
+    DPI_300 = 300,
+    DPI_500 = 500,
+    DPI_600 = 600
+   } DPI;
    ``` 
-   
 
-   
+13. **GetDPI** - *This function will return the existing DPi setup.*
 
+    ```C / C++
+    //C/C++
+    int WINAPI GetDPI(HANDLE ImgWizHlpHandle, int *dpi)
+    ```
+
+14. **SetImageQuality** - *By default the Quality is set as Document_Quality. This API is used to reset the output Quality*
+
+    ```C / C++
+    //C/C++
+    int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
+    ```
+
+    **Following are the recommended qualities:**
+    - **Photo_Quality**       - *To be used when higher Quality is required.*
+    - **Document_Quality**    - *Recommended Default quality.*
+    - **Compressed_Document** - *To be used when higher compression is required. But may degrade the image quality*
+
+16. **GetImageQuality** - *This function will return the existing image quality setup.*
+
+    ```C / C++
+    //C/C++
+    int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
+    ```
+17. **SetConvertion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
+
+    ```C / C++
+    //C/C++
+    int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
+    ```
+    **Following are the possible supported conversion:**
+
+    ```C / C++
+    //C/C++
+    typedef enum
+    {
+     No_Conversion,
+     Convert_To_BW,
+     Convert_To_Grey
+    } ConversionType;
+    ```
+
+18. **GetConvertion** - This function will return the existing conversion setup.
+     
+    ```C / C++
+    //C/C++
+    int WINAPI GetConvertion(HANDLE ImgWizHlpHandle, ConvertionType Convertion)
+    ```
+
+    
