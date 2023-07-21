@@ -42,10 +42,10 @@ This object reference will be used for all the imaging functionalities.
 
 ## Functionalties
 
-1. **CompressToTiff**	 -	*This function compresses multiple Images to a single tiff files.* 
-2. **CompressToTiff**	 -	*This function compresses multiple images to a single PDF file*
-3. **CompressToJpeg**	 -	*This function converts a sigle image file to JEPG file* 
-4. **AppendToTiffImage** -	*This function appends a single image file over an exisitng Tiff file*
+1. **CompressToTiff**	   -	*This function compresses multiple Images to a single tiff file.* 
+2. **CompressToTiff**	   -	*This function compresses multiple images to a single PDF file*
+3. **CompressToJpeg**	   -	*This function converts a single image file to a JEPG file* 
+4. **AppendToTiffImage** -	*This function appends a single image file over an existing Tiff file*
 
 C/C++ usage
 -------------
@@ -85,8 +85,8 @@ C/C++ usage
    **Parameter Name**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile** - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
-   - **InputFileCount** - *Number of files.*
+   - **InputFile**       - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
+   - **InputFileCount**  - *Number of files.*
    - **Output_Filename** - *Expected output file name with directory.*
    - **option** - *Following are the possible options: -*
    ```C/C++
@@ -110,8 +110,8 @@ C/C++ usage
    **Parameter Name**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile** - *Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.*
-   - **InputFileCount** - *Number of files.*
+   - **InputFile**       - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
+   - **InputFileCount**  - *Number of files.*
    - **Output_Filename** - *Expected output file name with directory.*
    - **option** - *Following are the possible options: -*
    ```C/C++
@@ -134,10 +134,10 @@ C/C++ usage
    
    **Parameter Name**
    
-   - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile** - *Array on input files. In case of multipage TIFF, all pages will be considered as input. This should be with full path.*
+   - **ImgWizHlpHandle**  - *Handle created using initialization*
+   - **InputFile**        - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
    - **Output_Directory** - *Expected output directory.*
-   - **option** - *Following are the possible options: -*
+   - **option**           - *Following are the possible options: -*
    ```C/C++
    //C/C++
    No_DPI_change = 0 
@@ -158,9 +158,9 @@ C/C++ usage
    **Parameter Name**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile** - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
-   - **Output_File** - *Expected output file name with directory.*
-   - **option** - *Following are the possible options: -*
+   - **InputFile**       - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
+   - **Output_File**     - *Expected output file name with directory.*
+   - **option**          - *Following are the possible options: -*
    ```C / C++
    //C/C++
    No_DPI_change = 0 NO
@@ -184,10 +184,10 @@ C/C++ usage
     **Parameter Name**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile** - *Single input file Image or PDF*
-   - **PageNo** - *Page Number of the input file. This is mainly required for input file type TIFF and PDF. For other types of images, we can send 0*
+   - **InputFile**       - *Single input file Image or PDF*
+   - **PageNo**          - *Page Number of the input file. This is mainly required for input file type TIFF and PDF. For other types of images, we can send 0*
    - **Output_Filename** - *Expected output file name with directory.*
-   - **option** - *Following are the possible options: -*
+   - **option**          - *Following are the possible options: -*
    ```C / C++
    //C/C++
    No_DPI_change = 0 NO
@@ -198,6 +198,54 @@ C/C++ usage
    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
+8. **SetLogFile** - This function will initiate the log dumping of the dll usage.
+
+   ```C / C++
+   //C/C++
+   int WINAPI SetLogFile(HANDLE ImgWizHlpHandle , char *error_log_file, int log_level, int *error)
+   ```
+
+   **Parameter Name**
+
+   - **ImgWizHlpHandle** - *Handle created using initialization.*
+   - **error_log_file**  - *Error log file name with full path*
+   - **log_level**       - *Has 3 log values: -*
+                           *0 - App run logging*
+                           *1 - App debug logging*
+                           *2 - Full Debug logging*
+   - **error**           - This will return the error for logging initialization.
+
+9. **SetPageLayout** - *By default DLL will create output as A4 layout. This parameter can be used to change the type of Layout for the output creation. 
+   If the input file is smaller than the layout size then the DLL will not increase the size, as this will reduce the quality of the output image.* Also this DLL
+   will maintain the aspect ratio of the original Image.
+
+   ```C / C++
+   //C/C++
+   int WINAPI SetPageLayout(HANDLE ImgWizHlpHandle, LayoutType Page)
+   ```
    
+   Following are the different Layout types supported
+
+    ```C / C++
+   //C/C++
+   typedef enum
+   {
+    A0,
+    A1,
+    A2,
+    A3,
+    A4,
+    A5,
+    A6,
+    A7
+   } LayoutType;
+   ```
+11. **GetPageLayout** - *This will return the existing page setup.*
+
+    ```C / C++
+   //C/C++
+   int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
+   ```
+
    
 
