@@ -241,11 +241,12 @@ C/C++ usage
    } LayoutType;
    ```
 11. **GetPageLayout** - *This will return the existing page setup.*
-
-    ```C / C++
+      
+   ```C / C++
    //C/C++
    int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
-   ```
+   ``` 
+   
 
    
 
