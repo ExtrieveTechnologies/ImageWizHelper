@@ -344,12 +344,30 @@ C/C++ usage
     ResetZeroDPI = 2
     ```
     
-   - *If only compression is to be performed then pass 0 as the option.*
-   - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
-   - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
+    - *If only compression is to be performed then pass 0 as the option.*
+    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
+    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
 18.  **GetErrorDescription** - This method will return the error string for a specific error code.
 
      **Error Description for respective error code return**
+
+     - ERR_INAVLID_EDITOR_HANDLE = 1 // "Invalid Editor Handle"
+     - ERR_INVALID_IMAGE_HANDLE = 2 // "Invalid Image Handle"
+     - ERR_INVALID_MULTIIMG_HANDLE = 3 // "Invalid MultiImage Handle"
+     - ERR_NO_MEMORY = 12 // "Memory is not available"
+     - ERR_FILE_OPEN = 13 // "File open error"
+     - ERR_FILE_WRITE = 14 // "File writing error"
+     - ERR_FILE_ACCESS = 15 // "File access error"
+     - ERR_FILE_NOT_FOUND = 16 // "File Not Found"
+     - ERR_FILE_ALREADY_EXIST = 17 // "File Already Exists"
+     - ERR_INVAL_PARAM = 18 // "Invalid input parameter"
+     - ERR_PAGE_NUMBER = 19 // "Invalid Page Number"
+     - ERR_FMT_NOT_SUPPORTED =20 // "Invalid input file format"
+     - ERR_DATA_PDF = 21 // "Input PDF file is data PDF file"
+     - ERR_PDF_READING = 22 // "Error in PDF Reading"
+     - ERR_PDF_WRITING = 23 // "Error in PDF writing"
+     - ERR_LIMAGING = 24 // "Error from Image Library"
+     - ERR_EXIF_FAILED = 25 // "Error in reading exif information"
 
      
