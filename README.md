@@ -296,6 +296,7 @@ C/C++ usage
     //C/C++
     int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
     ```
+    
 15. **SetConvertion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
 
     ```C / C++
