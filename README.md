@@ -240,14 +240,14 @@ C/C++ usage
     A7
    } LayoutType;
    ```
-11. **GetPageLayout** - *This will return the existing page setup.*
+10. **GetPageLayout** - *This will return the existing page setup.*
       
    ```C / C++
    //C/C++
    int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
    ```
 
-12. **SetDPI** - *By default DLL will use 200 DPI as the output DPI. This parameter can be used to change the DPI.*
+11. **SetDPI** - *By default DLL will use 200 DPI as the output DPI. This parameter can be used to change the DPI.*
      
     ```C / C++
     //C/C++
@@ -268,14 +268,14 @@ C/C++ usage
    } DPI;
    ``` 
 
-13. **GetDPI** - *This function will return the existing DPi setup.*
+12. **GetDPI** - *This function will return the existing DPi setup.*
 
     ```C / C++
     //C/C++
     int WINAPI GetDPI(HANDLE ImgWizHlpHandle, int *dpi)
     ```
 
-14. **SetImageQuality** - *By default the Quality is set as Document_Quality. This API is used to reset the output Quality*
+13. **SetImageQuality** - *By default the Quality is set as Document_Quality. This API is used to reset the output Quality*
 
     ```C / C++
     //C/C++
@@ -287,13 +287,13 @@ C/C++ usage
     - **Document_Quality**    - *Recommended Default quality.*
     - **Compressed_Document** - *To be used when higher compression is required. But may degrade the image quality*
 
-16. **GetImageQuality** - *This function will return the existing image quality setup.*
+14. **GetImageQuality** - *This function will return the existing image quality setup.*
 
     ```C / C++
     //C/C++
     int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
     ```
-17. **SetConvertion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
+15. **SetConvertion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
 
     ```C / C++
     //C/C++
@@ -311,14 +311,14 @@ C/C++ usage
     } ConversionType;
     ```
 
-18. **GetConvertion** - This function will return the existing conversion setup.
+16. **GetConvertion** - This function will return the existing conversion setup.
      
     ```C / C++
     //C/C++
     int WINAPI GetConvertion(HANDLE ImgWizHlpHandle, ConvertionType Convertion)
     ```
     
-19. **CompressPagesToTiff_Array** - *This function will take a single input file and take the file's pages in an array to compress those pages in a
+17. **CompressPagesToTiff_Array** - *This function will take a single input file and take the file's pages in an array to compress those pages in a
     single output.*
 
     It will also take an ArrayLenght of pages also.
