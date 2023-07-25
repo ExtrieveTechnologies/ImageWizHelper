@@ -13,7 +13,11 @@ Compatibility
 Currently the DLL API's are available in:
  * **C**
  * **C++**
- * **C#**
+ * **Java**
+
+Currently the **ImageWizHelper DLL** usage is from C, VB and C#
+
+For the Java Interface we use a **ImageWizHelper JNI DLL**
  
 
 C# usage
