@@ -249,133 +249,134 @@ C/C++ usage
    ```
 **10. GetPageLayout** - *This will return the existing page setup.*
       
-   ```C / C++
-   //C/C++
-   int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
-   ```
+  ```C / C++
+  //C/C++
+  int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
+  ```
 
 **11. SetDPI** - *By default DLL will use 200 DPI as the output DPI. This parameter can be used to change the DPI.*
      
-    ```C / C++
-    //C/C++
-    int WINAPI SetDPI(HANDLE ImgWizHlpHandle, DPI dpi)
-    ``` 
-    **Following are the possible DPI supported**
+  ```C / C++
+  //C/C++
+  int WINAPI SetDPI(HANDLE ImgWizHlpHandle, DPI dpi)
+  ```
+  **Following are the possible DPI supported**
     
-    ```C / C++
-    //C/C++
-    typedef enum
-    {
-     DPI_100 = 100,
-     DPI_150 = 150,
-     DPI_200 = 200,
-     DPI_300 = 300,
-     DPI_500 = 500,
-     DPI_600 = 600
-    } DPI;
-    ``` 
+  ```C / C++
+  //C/C++
+  typedef enum
+  {
+    DPI_100 = 100,
+    DPI_150 = 150,
+    DPI_200 = 200,
+    DPI_300 = 300,
+    DPI_500 = 500,
+    DPI_600 = 600
+  } DPI;
+  ``` 
 
 **12. GetDPI** - *This function will return the existing DPi setup.*
 
-    ```C / C++
-    //C/C++
-    int WINAPI GetDPI(HANDLE ImgWizHlpHandle, int *dpi)
-    ```
+```C / C++
+//C/C++
+int WINAPI GetDPI(HANDLE ImgWizHlpHandle, int *dpi)
+```
 
 **13. SetImageQuality** - *By default the Quality is set as Document_Quality. This API is used to reset the output Quality*
 
-    ```C / C++
-    //C/C++
-    int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
-    ```
+```C / C++
+//C/C++
+int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
+```
 
-    **Following are the recommended qualities:**
-    - **Photo_Quality**       - *To be used when higher Quality is required.*
-    - **Document_Quality**    - *Recommended Default quality.*
-    - **Compressed_Document** - *To be used when higher compression is required. But may degrade the image quality*
+**Following are the recommended qualities:**
+- **Photo_Quality**       - *To be used when higher Quality is required.*
+- **Document_Quality**    - *Recommended Default quality.*
+- **Compressed_Document** - *To be used when higher compression is required. But may degrade the image quality*
 
 **14. GetImageQuality** - *This function will return the existing image quality setup.*
 
-    ```C / C++
-    //C/C++
-    int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
-    ```
+```C / C++
+//C/C++
+int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
+```
     
 **15. SetConvertion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
 
-    ```C / C++
-    //C/C++
-    int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
-    ```
-    **Following are the possible supported conversion:**
+```C / C++
+//C/C++
+int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
+```
+**Following are the possible supported conversion:**
 
-    ```C / C++
-    //C/C++
-    typedef enum
-    {
-     No_Conversion,
-     Convert_To_BW,
-     Convert_To_Grey
-    } ConversionType;
-    ```
+```C / C++
+//C/C++
+typedef enum
+{
+  No_Conversion,
+  Convert_To_BW,
+  Convert_To_Grey
+} ConversionType;
+```
 
 **16. GetConvertion** - This function will return the existing conversion setup.
      
-    ```C / C++
-    //C/C++
-    int WINAPI GetConvertion(HANDLE ImgWizHlpHandle, ConvertionType Convertion)
-    ```
+```C / C++
+//C/C++
+int WINAPI GetConvertion(HANDLE ImgWizHlpHandle, ConvertionType Convertion)
+```
     
 **17. CompressPagesToTiff_Array** - *This function will take a single input file and take the file's pages in an array to compress those pages in a
-    single output.*
+single output.*
 
-    It will also take an ArrayLenght of pages also.
+It will also take an ArrayLenght of pages also.
 
-    It is recommended to keep a minimum of 150 as DPI to avoid Quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input
-    format is not supported it will not return to 0.
+It is recommended to keep a minimum of 150 as DPI to avoid Quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input
+format is not supported it will not return to 0.
 
-    For successful compression, it will return 0.
+For successful compression, it will return 0.
 
-    **Parameters**
+**Parameters**
 
-    - **ImgWizHlpHandle** - *Handle created using initialization.*
-    - **InputFile**       - *Single input file Image.*
-    - **OutputFile**      - *Expected output file name with directory*
-    - **PageArray**       - *Expected page number in an array to compress.*
-    - **PageArrayCount**  - *Array length*
-    - **Append**          - *Boolean value (true/false), which helps to use a single output file while Multiple Compression operations.*
-    - **option**          - *Following are the possible options: -*
-    ```C / C++
-    //C/C++
-    No_DPI_change = 0 NO
-    ResetAllDPI = 1
-    ResetZeroDPI = 2
-    ```
+- **ImgWizHlpHandle** - *Handle created using initialization.*
+- **InputFile**       - *Single input file Image.*
+- **OutputFile**      - *Expected output file name with directory*
+- **PageArray**       - *Expected page number in an array to compress.*
+- **PageArrayCount**  - *Array length*
+- **Append**          - *Boolean value (true/false), which helps to use a single output file while Multiple Compression operations.*
+- **option**          - *Following are the possible options: -*
     
-    - *If only compression is to be performed then pass 0 as the option.*
-    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
-    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
+```C / C++
+//C/C++
+No_DPI_change = 0 NO
+ResetAllDPI = 1
+ResetZeroDPI = 2
+```
+    
+- *If only compression is to be performed then pass 0 as the option.*
+- *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
+- *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
 **18. GetErrorDescription** - This method will return the error string for a specific error code.
 
-    **Error Description for respective error code return**
+**Error Description for respective error code return**
 
-    - ERR_INAVLID_EDITOR_HANDLE = **1** // "Invalid Editor Handle"
-    - ERR_INVALID_IMAGE_HANDLE = **2** // "Invalid Image Handle"
-    - ERR_INVALID_MULTIIMG_HANDLE = **3** // "Invalid MultiImage Handle"
-    - ERR_NO_MEMORY = 12 // "Memory is not available"
-    - ERR_FILE_OPEN = 13 // "File open error"
-    - ERR_FILE_WRITE = 14 // "File writing error"
-    - ERR_FILE_ACCESS = 15 // "File access error"
-    - ERR_FILE_NOT_FOUND = 16 // "File Not Found"
-    - ERR_FILE_ALREADY_EXIST = 17 // "File Already Exists"
-    - ERR_INVAL_PARAM = 18 // "Invalid input parameter"
-    - ERR_PAGE_NUMBER = 19 // "Invalid Page Number"
-    - ERR_FMT_NOT_SUPPORTED =20 // "Invalid input file format"
-    - ERR_DATA_PDF = 21 // "Input PDF file is data PDF file"
-    - ERR_PDF_READING = 22 // "Error in PDF Reading"
-    - ERR_PDF_WRITING = 23 // "Error in PDF writing"
-    - ERR_LIMAGING = 24 // "Error from Image Library"
-    - ERR_EXIF_FAILED = 25 // "Error in reading exif information"
+  - ERR_INAVLID_EDITOR_HANDLE = **1** // "Invalid Editor Handle"
+  - ERR_INVALID_IMAGE_HANDLE = **2** // "Invalid Image Handle"
+  - ERR_INVALID_MULTIIMG_HANDLE = **3** // "Invalid MultiImage Handle"
+  - ERR_NO_MEMORY = 12 // "Memory is not available"
+  - ERR_FILE_OPEN = 13 // "File open error"
+  - ERR_FILE_WRITE = 14 // "File writing error"
+  - ERR_FILE_ACCESS = 15 // "File access error"
+  - ERR_FILE_NOT_FOUND = 16 // "File Not Found"
+  - ERR_FILE_ALREADY_EXIST = 17 // "File Already Exists"
+  - ERR_INVAL_PARAM = 18 // "Invalid input parameter"
+  - ERR_PAGE_NUMBER = 19 // "Invalid Page Number"
+  - ERR_FMT_NOT_SUPPORTED =20 // "Invalid input file format"
+  - ERR_DATA_PDF = 21 // "Input PDF file is data PDF file"
+  - ERR_PDF_READING = 22 // "Error in PDF Reading"
+  - ERR_PDF_WRITING = 23 // "Error in PDF writing"
+  - ERR_LIMAGING = 24 // "Error from Image Library"
+  - ERR_EXIF_FAILED = 25 // "Error in reading exif information"
 
      
