@@ -96,13 +96,13 @@ C/C++ & Java usage
    - **InputFileCount**  - *Number of files.*
    - **Output_Filename** - *Expected output file name with directory.*
    - **option** - *Following are the possible options: -*
-     
-   ```C/C++
+  ```C / C++
    //C/C++
    No_DPI_change = 0 NO
    ResetAllDPI = 1
    ResetZeroDPI = 2
    ```
+
    - *If only compression is to be performed then pass 0 as the option.*
    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
@@ -124,7 +124,7 @@ C/C++ & Java usage
    - **InputFileCount**  - *Number of files.*
    - **Output_Filename** - *Expected output file name with directory.*
    - **option** - *Following are the possible options: -*
-   ```C/C++
+   ```C / C++
    //C/C++
    No_DPI_change = 0 NO
    ResetAllDPI = 1
@@ -148,9 +148,9 @@ C/C++ & Java usage
    - **InputFile**        - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
    - **Output_Directory** - *Expected output directory.*
    - **option**           - *Following are the possible options: -*
-   ```C/C++
+   ```C / C++
    //C/C++
-   No_DPI_change = 0 
+   No_DPI_change = 0 NO
    ResetAllDPI = 1
    ResetZeroDPI = 2
    ```
