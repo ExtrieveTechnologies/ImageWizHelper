@@ -65,7 +65,7 @@ C/C++ usage
    - **Logpath** - *Pass a path with write acccess to the application. Debug logs are created in this path. This is optional parameter.
       Debugging is not required then this can be kept as null.*
 
-2. **Terminate** - *Each initialized handle should be terminated using this function.*
+**2. Terminate** - *Each initialized handle should be terminated using this function.*
 
    ```C / C++
    //C/C++
@@ -75,7 +75,7 @@ C/C++ usage
    **Parameter Name**
    - **ImgWizHlpHandle** - *Handle created during initialization*
 
-3. **CompressToTiff** - *This function will take array of input files and will create a single Tif output file. Support input as
+**3. CompressToTiff** - *This function will take array of input files and will create a single Tif output file. Support input as
    array of JPEG, PNG, bmp, & TIFF. By default DLL will select 200 as the standard DPI and A4 as the page size. It is recommended to
    keep a minimum of 150 as DPi to avoid Quality issues. Formats like DJvu, JBIG2 an data PDF are not supported. If input format is not
    supported it will return false.*
@@ -104,7 +104,7 @@ C/C++ usage
    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-4. **CompressToPDF** - *This function will take an array of input files and create a single PDF output file. Support input as an array of JPEG, PNG, BMP, & TIFF. By 
+**4. CompressToPDF** - *This function will take an array of input files and create a single PDF output file. Support input as an array of JPEG, PNG, BMP, & TIFF. By 
    default, DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep a minimum of 150 DPI to avoid quality issues. Formats like DJvu, 
    JBIG2, and data PDF are not supported. If input format is not supported it will return false.*
    
@@ -131,7 +131,7 @@ C/C++ usage
    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-5. **CompressToJpeg** - *This function will compress as a single input file and create a Jpeg output file.*
+**5. CompressToJpeg** - *This function will compress as a single input file and create a Jpeg output file.*
 
    ```C / C++
    //C/C++
@@ -155,7 +155,7 @@ C/C++ usage
    *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
    *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-6. **AppendToTiff** - *This function will append a tiff image over an existing tiff image.*
+**6. AppendToTiff** - *This function will append a tiff image over an existing tiff image.*
 
    ```C / C++
    //C/C++
@@ -178,7 +178,7 @@ C/C++ usage
    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-7. **OCRBWConversionToTiff** - This function will take single input files and create a Black and White output file. Which will be mainly helpful
+**7. OCRBWConversionToTiff** - This function will take single input files and create a Black and White output file. Which will be mainly helpful
    for OCR purposes.The supported input file of type JPEg, BMP, and TIFF. By default, DLL will select 200 as the standard DPI & A4 as the page size.
    It is recommended to keep a minimum of 150 as DPI to avoid Quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input format
    is not supported it will return false.
@@ -205,7 +205,7 @@ C/C++ usage
    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
    - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-8. **SetLogFile** - This function will initiate the log dumping of the dll usage.
+**8. SetLogFile** - This function will initiate the log dumping of the dll usage.
 
    ```C / C++
    //C/C++
@@ -222,7 +222,7 @@ C/C++ usage
                            *2 - Full Debug logging*
    - **error**           - This will return the error for logging initialization.
 
-9. **SetPageLayout** - *By default DLL will create output as A4 layout. This parameter can be used to change the type of Layout for the output creation. 
+**9. SetPageLayout** - *By default DLL will create output as A4 layout. This parameter can be used to change the type of Layout for the output creation. 
    If the input file is smaller than the layout size then the DLL will not increase the size, as this will reduce the quality of the output image.* Also this DLL
    will maintain the aspect ratio of the original Image.
 
@@ -247,14 +247,14 @@ C/C++ usage
     A7
    } LayoutType;
    ```
-10. **GetPageLayout** - *This will return the existing page setup.*
+**10. GetPageLayout** - *This will return the existing page setup.*
       
    ```C / C++
    //C/C++
    int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
    ```
 
-11. **SetDPI** - *By default DLL will use 200 DPI as the output DPI. This parameter can be used to change the DPI.*
+**11. SetDPI** - *By default DLL will use 200 DPI as the output DPI. This parameter can be used to change the DPI.*
      
     ```C / C++
     //C/C++
@@ -275,14 +275,14 @@ C/C++ usage
     } DPI;
     ``` 
 
-12. **GetDPI** - *This function will return the existing DPi setup.*
+**12. GetDPI** - *This function will return the existing DPi setup.*
 
     ```C / C++
     //C/C++
     int WINAPI GetDPI(HANDLE ImgWizHlpHandle, int *dpi)
     ```
 
-13. **SetImageQuality** - *By default the Quality is set as Document_Quality. This API is used to reset the output Quality*
+**13. SetImageQuality** - *By default the Quality is set as Document_Quality. This API is used to reset the output Quality*
 
     ```C / C++
     //C/C++
@@ -294,14 +294,14 @@ C/C++ usage
     - **Document_Quality**    - *Recommended Default quality.*
     - **Compressed_Document** - *To be used when higher compression is required. But may degrade the image quality*
 
-14. **GetImageQuality** - *This function will return the existing image quality setup.*
+**14. GetImageQuality** - *This function will return the existing image quality setup.*
 
     ```C / C++
     //C/C++
     int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
     ```
     
-15. **SetConvertion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
+**15. SetConvertion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
 
     ```C / C++
     //C/C++
@@ -319,14 +319,14 @@ C/C++ usage
     } ConversionType;
     ```
 
-16. **GetConvertion** - This function will return the existing conversion setup.
+**16. GetConvertion** - This function will return the existing conversion setup.
      
     ```C / C++
     //C/C++
     int WINAPI GetConvertion(HANDLE ImgWizHlpHandle, ConvertionType Convertion)
     ```
     
-17. **CompressPagesToTiff_Array** - *This function will take a single input file and take the file's pages in an array to compress those pages in a
+**17. CompressPagesToTiff_Array** - *This function will take a single input file and take the file's pages in an array to compress those pages in a
     single output.*
 
     It will also take an ArrayLenght of pages also.
@@ -356,7 +356,7 @@ C/C++ usage
     - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
     - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
-18. **GetErrorDescription** - This method will return the error string for a specific error code.
+**18. GetErrorDescription** - This method will return the error string for a specific error code.
 
     **Error Description for respective error code return**
 
