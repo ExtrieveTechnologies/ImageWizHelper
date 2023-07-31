@@ -293,6 +293,14 @@ C/C++ & Java usage
   //C/C++
   int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
   ```
+  ```Java
+  //Java
+  public Layout GetPageLayouWidth( ) 
+  ```
+  ```Java
+  //Java
+  public Layout GetPageLayoutHeight( )
+  ```
 
 **9. SetDPI** - *By default DLL will use 200 DPI as the output DPI. This parameter can be used to change the DPI.*
      
@@ -300,6 +308,10 @@ C/C++ & Java usage
   //C/C++
   int WINAPI SetDPI(HANDLE ImgWizHlpHandle, DPI dpi)
   ```
+  ```Java
+  public int SetDPI(ImageDPI imageDPI)
+  ```
+
   **Following are the possible DPI supported**
     
   ```C / C++
@@ -313,6 +325,18 @@ C/C++ & Java usage
     DPI_500 = 500,
     DPI_600 = 600
   } DPI;
+  ```
+  ```Java
+  //Java
+  Unknown(-1),
+  A0(0),
+  A1(1),
+  A2(2),
+  A3(3),
+  A4(4),
+  A5(5),
+  A6(6),
+  A7(7); 
   ``` 
 
 **10. GetDPI** - *This function will return the existing DPi setup.*
