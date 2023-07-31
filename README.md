@@ -100,12 +100,10 @@ C/C++ & Java usage
    - **InputFileCount**  - *Number of files.*
    - **Output_Filename** - *Expected output file name with directory.*
    - **option** - *Following are the possible options: -*
-  ```C / C++
    //C/C++
    No_DPI_change = 0 NO
    ResetAllDPI = 1
    ResetZeroDPI = 2
-   ```
 
    - *If only compression is to be performed then pass 0 as the option.*
    - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
