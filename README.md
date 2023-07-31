@@ -110,6 +110,46 @@ C/C++ & Java usage
    //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
    //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI
    ```
+   **ResetOption: -**
+
+   ```Java
+   //Java
+   public enum ResetOption
+	  {	
+	    No_DPI_change(0),              
+	    ResetAllDPI(1),              
+	    ResetZeroDPI(2);			 
+	    
+	    private int value;
+	    private static HashMap<Object, Object> map = new HashMap<Object, Object>();
+	
+	    ResetOption(int value)
+     {
+		     this.value = value;
+		   }
+	   	 	
+		   static
+     {
+	      for (ResetOption resetOption : ResetOption.values())
+       {
+	        map.put(resetOption.value, resetOption);
+	      }
+	    }
+	    	
+	    	public static ResetOption valueOf(int resetOption)
+      {
+	       return (ResetOption) map.get(resetOption);
+	     }   	 	
+	
+		    public int getValue()
+      {
+		      return value;
+		    }
+	    	
+	   }
+   ```
+   
+   
 
 **2. CompressToPDF** - *This function will take an array of input files and create a single PDF output file. Support input as an array of JPEG, PNG, BMP, & TIFF. By 
    default, DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep a minimum of 150 DPI to avoid quality issues. Formats like DJvu, 
