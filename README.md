@@ -447,6 +447,17 @@ format is not supported it will not return to 0.
 
 For successful compression, it will return 0.
 
+```C/C++
+//C/C++
+INT32 WINAPI CompressPagesToTiff_Array(HANDLE ImgWizHlpHandle, char *InputFile, char *OutputFile,
+INT32 *PageArray, INT32 PageArrayCount, BOOL Append, INT32 option)
+```
+
+```Java
+//Java
+public int CompressPagesToTiff_Array(String inputFile, String outputFile, int[] pageArray, boolean append,ResetOption resetOption)
+```
+
 **Parameters**
 
 - **ImgWizHlpHandle** - *Handle created using initialization.*
@@ -463,7 +474,7 @@ No_DPI_change = 0 NO
 ResetAllDPI = 1
 ResetZeroDPI = 2
 ```
-    
+ 
 - *If only compression is to be performed then pass 0 as the option.*
 - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
 - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
