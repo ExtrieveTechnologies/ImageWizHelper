@@ -88,7 +88,11 @@ C/C++ & Java usage
    INT32 WINAPI CompressToTIFF(HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char
    *Output_Filename , INT32 option )
    ```
-   
+   ```Java
+   //Java
+   public int CompressToTIFF(String[] inputFiles, String outputFile, ResetOption resetOption)
+   ``` 
+
    **Parameters**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
@@ -116,7 +120,11 @@ C/C++ & Java usage
    int WINAPI CompressToPDF (HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char
    *Output_Filename, int option )
    ```
-   
+   ```Java
+   //Java
+   public int CompressToPDF(String[] inputFiles, String outputFile, ResetOption resetOption) 
+   ```
+ 
    **Parameters**
    
    - **ImgWizHlpHandle** - *Handle created using initialization*
@@ -141,7 +149,11 @@ C/C++ & Java usage
    int WINAPI CompressToJpeg(HANDLE ImgWizHlpHandle , char **InputFile , char *Output_Directory, int
    option)
    ```
-   
+   ```Java
+   //Java
+   public int CompressToJPEG(String[] inputFile, String outPutFile, ResetOption resetOption)
+   ```
+
    **Parameters**
    
    - **ImgWizHlpHandle**  - *Handle created using initialization*
@@ -163,6 +175,10 @@ C/C++ & Java usage
    ```C / C++
    //C/C++
    int WINAPI AppendToTiff(HANDLE ImgWizHlpHandle , char *InputFile , char *OutputFile, int option)
+   ```
+   ```Java
+   //Java
+   public int AppendToTIFF(String inputFile, String outputFile,ResetOption resetOption)
    ```
 
    **Parameters**
@@ -189,6 +205,10 @@ C/C++ & Java usage
    ```C / C++
    //C/C++
    INT32 OCRBWConversionToTiff(HANDLE ImgWizHlpHandle, char *InputFile, INT32 PageNo, char*Output_Filename , INT32 option )
+   ```
+   ```Java
+   //Java
+   public int OcrBWConversionToTiff(String inputFile, int pageNumber, String outputFileName, ResetOption resetOption)
    ```
 
    **Parameters**
@@ -233,6 +253,10 @@ C/C++ & Java usage
    //C/C++
    int WINAPI SetPageLayout(HANDLE ImgWizHlpHandle, LayoutType Page)
    ```
+   ```Java
+   //Java 
+   public int SetPageLayout(Layout layout)
+   ```
    
    Following are the different Layout types supported
 
@@ -250,6 +274,19 @@ C/C++ & Java usage
     A7
    } LayoutType;
    ```
+   ```Java
+   //Java
+   Unknown(-1),
+   A0(0),
+   A1(1),
+   A2(2),
+   A3(3),
+   A4(4),
+   A5(5),
+   A6(6),
+   A7(7);
+   ```
+ 
 **8. GetPageLayout** - *This will return the existing page setup.*
       
   ```C / C++
