@@ -345,12 +345,36 @@ C/C++ & Java usage
 //C/C++
 int WINAPI GetDPI(HANDLE ImgWizHlpHandle, int *dpi)
 ```
+```Java
+//Java
+public ImageDPI GetDPI()
+```
 
 **11. SetImageQuality** - *By default the Quality is set as Document_Quality. This API is used to reset the output Quality*
 
 ```C / C++
 //C/C++
 int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
+```
+```Java
+//Java
+public int SetImageQuality(ImageQuality imageQuality)
+```
+```C / C++
+//C/C++
+ImageQuality
+{
+  Photo_Quality = 0;
+  Document_Quality = 1;
+  Compressed_Document = 2; 
+}
+```
+```Java
+//Java
+Unknown(-1),
+Photo_Quality(0),
+Document_Quality(1),
+Compressed_Document(2);
 ```
 
 **Following are the recommended qualities:**
@@ -364,6 +388,9 @@ int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
 //C/C++
 int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
 ```
+```Java
+public ImageQuality GetImageQuality()
+```
     
 **13. SetConvertion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
 
@@ -371,6 +398,11 @@ int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
 //C/C++
 int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
 ```
+```Java
+//Java
+public int SetConversion(ConversionType convertionType)
+```
+
 **Following are the possible supported conversion:**
 
 ```C / C++
