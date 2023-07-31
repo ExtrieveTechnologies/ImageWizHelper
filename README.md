@@ -392,7 +392,7 @@ int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
 public ImageQuality GetImageQuality()
 ```
     
-**13. SetConvertion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
+**13. SetConversion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
 
 ```C / C++
 //C/C++
@@ -415,11 +415,26 @@ typedef enum
 } ConversionType;
 ```
 
-**14. GetConvertion** - This function will return the existing conversion setup.
+```Java
+//Java
+public enum ConversionType
+{
+  Unknown(-1),
+  No_Conversion(0),
+  Convert_To_BW(1),
+  Convert_To_Grey(2);
+}
+
+**14. GetConversion** - This function will return the existing conversion setup.
      
 ```C / C++
 //C/C++
-int WINAPI GetConvertion(HANDLE ImgWizHlpHandle, ConvertionType Convertion)
+int WINAPI GetConversion(HANDLE ImgWizHlpHandle, ConvertionType Conversion)
+```
+
+```Java
+//Java
+public ConversionType GetConversion()
 ```
     
 **15. CompressPagesToTiff_Array** - *This function will take a single input file and take the file's pages in an array to compress those pages in a
