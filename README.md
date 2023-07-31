@@ -424,6 +424,7 @@ public enum ConversionType
   Convert_To_BW(1),
   Convert_To_Grey(2);
 }
+```
 
 **14. GetConversion** - This function will return the existing conversion setup.
      
