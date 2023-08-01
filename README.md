@@ -212,17 +212,6 @@ C/C++ & Java usage
    //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI 
    ```
 
-   
-   ImgWizHlpHandle  - Handle created using initialization
-   InputFile        - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
-   Output_Directory - Expected output directory.
-   option           - Following are the possible options:-
-   
-   No_DPI_change = 0 NO
-   ResetAllDPI = 1
-   ResetZeroDPI = 2
-   
-
 **4. AppendToTiff** - *This function will append a tiff image over an existing tiff image.*
 
    ```C / C++
