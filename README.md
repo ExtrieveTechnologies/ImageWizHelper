@@ -248,45 +248,45 @@ C/C++ & Java usage
    ```C / C++
    //C/C++
    INT32 OCRBWConversionToTiff(HANDLE ImgWizHlpHandle, char *InputFile, INT32 PageNo, char*Output_Filename , INT32 option )
+
+   //ImgWizHlpHandle - Handle created using initialization
+   //InputFile       - Single input file Image or PDF
+   //PageNo          - Page Number of the input file. This is mainly required for input file type TIFF and PDF. For other types of images, we can send 0
+   //Output_Filename - Expected output file name with directory.
+   //option          - Following are the possible options: -
+
+   //No_DPI_change = 0 NO
+   //ResetAllDPI = 1
+   //ResetZeroDPI = 2
    ```
    ```Java
    //Java
    public int OcrBWConversionToTiff(String inputFile, int pageNumber, String outputFileName, ResetOption resetOption)
+
+   //inputFile       - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
+   //outputFile     - Expected output file name with directory
+   //resetOption    - Following are the possible options
+
+   //No_DPI_change(0), DPI will not be resetted this case . 
+   //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
+   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI 
    ```
 
-   **Parameters**
-   
-   - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile**       - *Single input file Image or PDF*
-   - **PageNo**          - *Page Number of the input file. This is mainly required for input file type TIFF and PDF. For other types of images, we can send 0*
-   - **Output_Filename** - *Expected output file name with directory.*
-   - **option**          - *Following are the possible options: -*
-   ```C / C++
-   //C/C++
-   No_DPI_change = 0 NO
-   ResetAllDPI = 1
-   ResetZeroDPI = 2
-   ```
-   - *If only compression is to be performed then pass 0 as the option.*
-   - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
-   - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
 **6. SetLogFile** - This function will initiate the log dumping of the dll usage.
 
    ```C / C++
    //C/C++
    int WINAPI SetLogFile(HANDLE ImgWizHlpHandle , char *error_log_file, int log_level, int *error)
+
+   //ImgWizHlpHandle - Handle created using initialization.
+   //error_log_file  - Error log file name with full path.
+   //log_level       - Has 3 log values: -
+   //                        0 - App run logging
+   //                        1 - App debug logging
+   //                        2 - Full Debug logging
+   //error           - This will return the error for logging initialization.
    ```
-
-   **Parameters**
-
-   - **ImgWizHlpHandle** - *Handle created using initialization.*
-   - **error_log_file**  - *Error log file name with full path*
-   - **log_level**       - *Has 3 log values: -*
-                           *0 - App run logging*
-                           *1 - App debug logging*
-                           *2 - Full Debug logging*
-   - **error**           - This will return the error for logging initialization.
 
 **7. SetPageLayout** - *By default DLL will create output as A4 layout. This parameter can be used to change the type of Layout for the output creation. 
    If the input file is smaller than the layout size then the DLL will not increase the size, as this will reduce the quality of the output image.* Also this DLL
@@ -319,15 +319,44 @@ C/C++ & Java usage
    ```
    ```Java
    //Java
-   Unknown(-1),
-   A0(0),
-   A1(1),
-   A2(2),
-   A3(3),
-   A4(4),
-   A5(5),
-   A6(6),
-   A7(7);
+   public enum Layout
+   {
+     Unknown(-1),
+     A0(0),
+     A1(1),
+     A2(2),
+     A3(3),
+     A4(4),
+     A5(5),
+     A6(6),
+     A7(7);
+	
+     private int value;
+     private static HashMap<Object, Object> map = new HashMap<Object, Object>();
+	
+     Layout(int value)
+     {
+      this.value = value;
+     }
+	
+     static
+     {
+      for (Layout layout : Layout.values())
+      {
+        map.put(layout.value, layout);
+      }
+     }
+
+     public static Layout valueOf(int layout)
+     {
+      return (Layout) map.get(layout);
+     }
+	
+     public int getValue()
+     {
+      return value;
+     }
+   }
    ```
  
 **8. GetPageLayout** - *This will return the existing page setup.*
@@ -371,15 +400,44 @@ C/C++ & Java usage
   ```
   ```Java
   //Java
-  Unknown(-1),
-  A0(0),
-  A1(1),
-  A2(2),
-  A3(3),
-  A4(4),
-  A5(5),
-  A6(6),
-  A7(7); 
+  public enum ImageDPI
+  {
+   Unknown(-1),
+   DPI_100(0),
+   DPI_150(1),
+   DPI_200(2),
+   DPI_300(3),
+   DPI_500(4),
+   DPI_600(5);
+	    	
+   private int value;
+	
+   private static HashMap<Object, Object> map = new HashMap<Object, Object>();
+	    	
+   ImageDPI(int value)
+   {
+    this.value = value;
+   }
+	
+   static
+   {
+
+    for (ImageDPI imageDPI : ImageDPI.values())
+    {
+     map.put(imageDPI.value, imageDPI);
+    }
+
+   }
+   public static ImageDPI valueOf(int imageDPI)
+   {
+   return (ImageDPI) map.get(imageDPI);
+   }
+
+   public int getValue()
+   {
+    return value;
+   }
+  }
   ``` 
 
 **10. GetDPI** - *This function will return the existing DPi setup.*
