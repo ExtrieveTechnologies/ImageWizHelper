@@ -115,38 +115,38 @@ C/C++ & Java usage
    ```Java
    //Java
    public enum ResetOption
-	  {	
-	    No_DPI_change(0),              
-	    ResetAllDPI(1),              
-	    ResetZeroDPI(2);			 
+   {	
+     No_DPI_change(0),              
+     ResetAllDPI(1),              
+     ResetZeroDPI(2);			 
 	    
-	    private int value;
-	    private static HashMap<Object, Object> map = new HashMap<Object, Object>();
+     private int value;
+     private static HashMap<Object, Object> map = new HashMap<Object, Object>();
 	
-	    ResetOption(int value)
+     ResetOption(int value)
      {
-		     this.value = value;
-		   }
+      this.value = value;
+     }
 	   	 	
-		   static
+     static
      {
-	      for (ResetOption resetOption : ResetOption.values())
+       for (ResetOption resetOption : ResetOption.values())
        {
-	        map.put(resetOption.value, resetOption);
-	      }
-	    }
+	 map.put(resetOption.value, resetOption);
+       }
+     }
 	    	
-	    	public static ResetOption valueOf(int resetOption)
-      {
-	       return (ResetOption) map.get(resetOption);
-	     }   	 	
+     public static ResetOption valueOf(int resetOption)
+     {
+       return (ResetOption) map.get(resetOption);
+     }   	 	
 	
-		    public int getValue()
-      {
-		      return value;
-		    }
+     public int getValue()
+     {
+       return value;
+     }
 	    	
-	   }
+}
    ```
    
    
@@ -159,28 +159,29 @@ C/C++ & Java usage
    //C/C++
    int WINAPI CompressToPDF (HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char
    *Output_Filename, int option )
+
+   //ImgWizHlpHandle - Handle created using initialization.
+   //InputFile       - Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.
+   //InputFileCount  - Number of files.
+   //Output_Filename - Expected output file name with directory.
+   //option          - Following are the possible options.
+   
+   //No_DPI_change = 0 NO
+   //ResetAllDPI = 1
+   //ResetZeroDPI = 2
    ```
    ```Java
    //Java
-   public int CompressToPDF(String[] inputFiles, String outputFile, ResetOption resetOption) 
-   ```
- 
-   **Parameters**
+   public int CompressToPDF(String[] inputFiles, String outputFile, ResetOption resetOption)
    
-   - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile**       - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
-   - **InputFileCount**  - *Number of files.*
-   - **Output_Filename** - *Expected output file name with directory.*
-   - **option** - *Following are the possible options: -*
-   ```C / C++
-   //C/C++
-   No_DPI_change = 0 NO
-   ResetAllDPI = 1
-   ResetZeroDPI = 2
+   //inputFiles  - Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.
+   //outputFile  - Expected output file with directory.
+   //resetOption - Following are the possible options: -
+   
+   //No_DPI_change(0), DPI will not be resetted this case . 
+   //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
+   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI 
    ```
-   - *If only compression is to be performed then pass 0 as the option.*
-   - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
-   - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
 **3. CompressToJpeg** - *This function will compress as a single input file and create a Jpeg output file.*
 
@@ -188,27 +189,39 @@ C/C++ & Java usage
    //C/C++
    int WINAPI CompressToJpeg(HANDLE ImgWizHlpHandle , char **InputFile , char *Output_Directory, int
    option)
+
+   //ImgWizHlpHandle  - Handle created using initialization
+   //InputFile        - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
+   //Output_Directory - Expected output directory.
+   //option           - Following are the possible options:-
+   
+   //No_DPI_change = 0 NO
+   //ResetAllDPI = 1
+   //ResetZeroDPI = 2
    ```
    ```Java
    //Java
    public int CompressToJPEG(String[] inputFile, String outPutFile, ResetOption resetOption)
+
+   //inputFile   - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
+   //outPutFile  - Expected output directory.
+   //resetOption - Following are the possible options:-
+   
+   //No_DPI_change(0), DPI will not be resetted this case . 
+   //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
+   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI 
    ```
 
-   **Parameters**
    
-   - **ImgWizHlpHandle**  - *Handle created using initialization*
-   - **InputFile**        - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
-   - **Output_Directory** - *Expected output directory.*
-   - **option**           - *Following are the possible options: -*
-   ```C / C++
-   //C/C++
+   ImgWizHlpHandle  - Handle created using initialization
+   InputFile        - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
+   Output_Directory - Expected output directory.
+   option           - Following are the possible options:-
+   
    No_DPI_change = 0 NO
    ResetAllDPI = 1
    ResetZeroDPI = 2
-   ```
-   *If only compression is to be performed then pass 0 as the option.*
-   *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
-   *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
+   
 
 **4. AppendToTiff** - *This function will append a tiff image over an existing tiff image.*
 
