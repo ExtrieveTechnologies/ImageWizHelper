@@ -217,27 +217,28 @@ C/C++ & Java usage
    ```C / C++
    //C/C++
    int WINAPI AppendToTiff(HANDLE ImgWizHlpHandle , char *InputFile , char *OutputFile, int option)
+   
+   //ImgWizHlpHandle - Handle created using initialization
+   //InputFile       - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
+   //Output_File     - Expected output file name with directory
+   //option    - Following are the possible options
+
+   //No_DPI_change = 0 NO
+   //ResetAllDPI = 1
+   //ResetZeroDPI = 2 
    ```
    ```Java
    //Java
    public int AppendToTIFF(String inputFile, String outputFile,ResetOption resetOption)
-   ```
 
-   **Parameters**
-   
-   - **ImgWizHlpHandle** - *Handle created using initialization*
-   - **InputFile**       - *Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.*
-   - **Output_File**     - *Expected output file name with directory.*
-   - **option**          - *Following are the possible options: -*
-   ```C / C++
-   //C/C++
-   No_DPI_change = 0 NO
-   ResetAllDPI = 1
-   ResetZeroDPI = 2
+   //inputFile       - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
+   //outputFile     - Expected output file name with directory
+   //resetOption    - Following are the possible options
+
+   //No_DPI_change(0), DPI will not be resetted this case . 
+   //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
+   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI 
    ```
-   - *If only compression is to be performed then pass 0 as the option.*
-   - *If all images have to be resized to the standard page size then use **ResetAllDPI** option*
-   - *If only mobile captured images are to be resized then keep **ResetZeroDPI** as the parameter.*
 
 **5. OCRBWConversionToTiff** - This function will take single input files and create a Black and White output file. Which will be mainly helpful
    for OCR purposes.The supported input file of type JPEg, BMP, and TIFF. By default, DLL will select 200 as the standard DPI & A4 as the page size.
