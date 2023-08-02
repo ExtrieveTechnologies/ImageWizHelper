@@ -461,21 +461,49 @@ int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
 //Java
 public int SetImageQuality(ImageQuality imageQuality)
 ```
+
 ```C / C++
 //C/C++
-ImageQuality
-{
-  Photo_Quality = 0;
-  Document_Quality = 1;
-  Compressed_Document = 2; 
-}
+No_DPI_change = 0
+ResetAllDPI = 1
+ResetZeroDPI = 2
 ```
+
 ```Java
 //Java
-Unknown(-1),
-Photo_Quality(0),
-Document_Quality(1),
-Compressed_Document(2);
+public enum ImageQuality
+{
+ Unknown(-1),
+ Photo_Quality(0),
+ Document_Quality(1),
+ Compressed_Document(2);
+	        
+ private final int value;
+ private static HashMap<Object, Object> map = new HashMap<Object, Object>();
+	
+ ImageQuality(int value)
+ {
+  this.value = value;
+ }
+	
+ static
+ {
+  for (ImageQuality imageQuality : ImageQuality.values())
+  {
+   map.put(imageQuality.value, imageQuality);
+  }
+ }
+	    	
+ public static ImageQuality valueOf(int imageQuality)
+ {
+  return (ImageQuality) map.get(imageQuality);
+ }
+	    	
+ public int getValue()
+ {
+  return value;
+ }
+}
 ```
 
 **Following are the recommended qualities:**
@@ -520,11 +548,38 @@ typedef enum
 //Java
 public enum ConversionType
 {
-  Unknown(-1),
-  No_Conversion(0),
-  Convert_To_BW(1),
-  Convert_To_Grey(2);
-}
+ Unknown(-1),
+ No_Conversion(0),
+ Convert_To_BW(1),
+ Convert_To_Grey(2);
+	    	
+ private int value;
+ private static HashMap<Object, Object> map = new HashMap<Object, Object>();
+	
+  ConversionType(int value)
+  {
+   this.value = value;
+  }
+	    	 
+  static
+  {
+   for (ConversionType conversiontype : ConversionType.values())
+   {
+    map.put(conversiontype.value, conversiontype);
+   }
+  }
+
+ public static ConversionType valueOf(int conversiontype)
+ {
+  return (ConversionType) map.get(conversiontype);
+ }
+	
+ public int getValue()
+ {
+  return value;
+ }
+	    	
+} 
 ```
 
 **14. GetConversion** - This function will return the existing conversion setup.
