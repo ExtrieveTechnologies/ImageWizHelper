@@ -75,6 +75,59 @@ C/C++ Initialization
    **Parameter Name**
    - **ImgWizHlpHandle** - *Handle created during initialization*
 
+Java Initialization
+-------------
+**1. Initialize** - *This function is used to initialize the DLL and validate the license. This function should
+   be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
+   handle.*
+     
+   ``` Java
+   //Java
+   package com.extrieve.imaging.sdk;
+   ```
+   **Other imports include: -**
+
+   ``` Java
+   //Java
+   import java.io.File;
+   import java.io.FileInputStream;
+   import java.nio.file.Files;
+   import java.nio.file.Paths;
+   import java.util.Properties;
+   import java.util.Scanner;
+
+   import com.extrieve.imaging.sdk.ImageWizHelperJNI.ImageDPI;
+   import com.extrieve.imaging.sdk.ImageWizHelperJNI.ImageQuality;
+   import com.extrieve.imaging.sdk.ImageWizHelperJNI.Layout;
+   import com.extrieve.imaging.sdk.ImageWizHelperJNI.ResetOption;
+   ```
+
+   *Once the import statements are included create the object class "ImageWizHelperJNI". The same object "HANDLE can be sued for calling functionalities
+    of the SharedLibraries.*
+
+   ``` Java
+   //Java
+   ImageWizHelperJNI HANDLE = new ImageWizHelperJNI();
+   ```
+   *For example: -*
+
+   ``` Java
+   //Java
+   ImageDPI DPI = HANDLE.GetDPI();   
+   ```
+   *In the above example the function "GetDPI" can be called from the object declared above "HANDLE".*
+
+**2. Terminate** - *Each initialized handle should be terminated using this function.*
+
+   ``` Java
+   //Java
+   private static native int terminate(long hdl);
+   ```
+    
+   **Parameter Name**
+   - **hdl** - *Handle created during initialization*
+
+
 C/C++ & Java usage
 ------------------
 
