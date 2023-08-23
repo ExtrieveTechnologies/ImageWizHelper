@@ -112,6 +112,16 @@ C/C++ & Java usage
    ```
    **ResetOption: -**
 
+   ```C / C++
+   //C/C++
+   public enum ResetOption
+   {
+      No_DPI_change,              // DPI will not be resetted this case . 
+      ResetAllDPI,                // Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
+      ResetZeroDPI                // If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI
+   };
+   ```
+
    ```Java
    //Java
    public enum ResetOption
