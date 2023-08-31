@@ -1,12 +1,11 @@
 # ImageWizHelper - Imaging SDK from Extrieve
 <img src="https://raw.githubusercontent.com/ExtrieveTechnologies/ImageWizHelper/main/ImageWizHelper_v2.gif" alt="img-verification" autoplay>
 
-> **Developer-friendly** & **Easy to integration** SDK.
+> **Developer-friendly** & **Easy to integration** DLL.
 
-Download
---------
-You can download the SDK file from GitHub's [releases page](https://github.com/ExtrieveTechnologies/QuickCapture_Android/releases/) and add the file dependency manually into the project/app.
-
+Introduction
+-------------
+Struggling to find a reliable Imaging SDK for Compression? Need an Imaging SDK for converting images to PDF or TIFF ? Look no further! Extrieve introduces ImageWizHelper, the ultimate solution for all your image compression, conversion, and merging requirements.
 
 Compatibility
 -------------
