@@ -10,8 +10,7 @@ Struggling to find a reliable Imaging SDK for Compression? Need an Imaging SDK f
 Compatibility
 -------------
 Currently the DLL API's are available in:
- * **C**
- * **C++**
+ * **C#**
  * **Java**
 
 Currently the **ImageWizHelper DLL** usage is from C, VB and C#
