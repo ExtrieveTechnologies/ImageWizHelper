@@ -49,25 +49,39 @@ This object reference will be used for all the imaging functionalities.
 3. **CompressToJpeg**	   -	*This function converts a single image file to a JEPG file* 
 4. **AppendToTiffImage** -	*This function appends a single image file over an existing Tiff file*
 
-C/C++ Initialization
+C#/C++ Initialization
 -------------
 **1. Initialize** - *This function is used to initialize the DLL and validate the license. This function should
    be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
    handle.*
      
-   ``` C/ C++
-   //C/C++
+   ``` C#
+   //C#
    HANDLE WINAPI Initialize (char *Logpath)
    ```
+   ``` C
+   //C
+   BOOL InitilizeHelperFunc(char* error_path, char* app_name, char*lic_data)
+
+   //error_path : - Create ImageWizHelper error file path of current directory.
+   //app_name : - Decalre app name to store the current application name calling the ImageWizHelper DLL.
+   //lic_data : - Declare license data to store the license data.
+   ```
+
    **Parameter Name**
    - **Logpath** - *Pass a path with write acccess to the application. Debug logs are created in this path. This is optional parameter.
       Debugging is not required then this can be kept as null.*
 
 **2. Terminate** - *Each initialized handle should be terminated using this function.*
 
-   ```C / C++
-   //C/C++
+   ```C#
+   //C#
    int WINAPI Terminate(HANDLE ImgWizHlpHandle)
+   ```
+
+   ```C
+   //C
+   void TerminateHdl(HANDLE ImageWizHandle)
    ```
     
    **Parameter Name**
@@ -124,6 +138,7 @@ Java Initialization
     
    **Parameter Name**
    - **hdl** - *Handle created during initialization*
+
 
 
 C/C++ & Java usage
