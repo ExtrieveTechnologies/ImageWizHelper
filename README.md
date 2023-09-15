@@ -141,8 +141,8 @@ C/C++ & Java usage
    keep a minimum of 150 as DPi to avoid Quality issues. Formats like DJvu, JBIG2 an data PDF are not supported. If input format is not
    supported it will return false.*
    
-   ```C / C++
-   //C/C++
+   ```C#
+   //C#
    INT32 WINAPI CompressToTIFF(HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char *Output_Filename , INT32 option )
 
    //ImgWizHlpHandle - Handle created using initialization.
@@ -156,6 +156,20 @@ C/C++ & Java usage
    //ResetZeroDPI = 2
    ```
 
+   ```C / C++
+   //C/C++
+   ret = CompressToTIFF(ImageWizHandle, InputFileArray, 1, OutputFile, reset);
+
+    //ImageWizHandle - Handle created using initialization.
+   //InputFileArray       - Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.
+   //OutputFile - Expected output file name with directory.
+   //reset          - Following are the possible options.
+   
+   //No_DPI_change = 0 NO
+   //ResetAllDPI = 1
+   //ResetZeroDPI = 2
+   ```
+    
    ```Java
    //Java
    public int CompressToTIFF(String[] inputFiles, String outputFile, ResetOption resetOption)
@@ -170,8 +184,8 @@ C/C++ & Java usage
    ```
    **ResetOption: -**
 
-   ```C / C++
-   //C/C++
+   ```C#
+   //C#
    public enum ResetOption
    {
       No_DPI_change,              
@@ -180,6 +194,16 @@ C/C++ & Java usage
    };
    ```
 
+   ```C / C++
+   //C
+   enum ResetOption
+   {
+     No_DPI_change,
+     ResetAllDPI,
+     ResetNonDPI
+   }
+   ```
+   
    ```Java
    //Java
    public enum ResetOption
@@ -218,15 +242,13 @@ C/C++ & Java usage
    ```
    
    
-
 **2. CompressToPDF** - *This function will take an array of input files and create a single PDF output file. Support input as an array of JPEG, PNG, BMP, & TIFF. By 
    default, DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep a minimum of 150 DPI to avoid quality issues. Formats like DJvu, 
    JBIG2, and data PDF are not supported. If input format is not supported it will return false.*
    
-   ```C / C++
-   //C/C++
-   int WINAPI CompressToPDF (HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char
-   *Output_Filename, int option )
+   ```C#
+   //C#
+   int WINAPI CompressToPDF (HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char*Output_Filename, int option )
 
    //ImgWizHlpHandle - Handle created using initialization.
    //InputFile       - Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.
@@ -238,6 +260,19 @@ C/C++ & Java usage
    //ResetAllDPI = 1
    //ResetZeroDPI = 2
    ```
+   ```C / C++
+   //C / C++
+   ret = CompressToPDF(ImageWizHandle, InputFileArray, 1, OutputFile, reset);
+   //ImageWizHandle - Handle created using initialization.
+   //InputFileArray - Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.
+   //OutputFile     - Expected output file name with directory.
+   //reset          - Following are the possible options.
+
+   //No_DPI_change 
+   //ResetAllDPI
+   //ResetZeroDPI
+   ```
+
    ```Java
    //Java
    public int CompressToPDF(String[] inputFiles, String outputFile, ResetOption resetOption)
@@ -253,8 +288,8 @@ C/C++ & Java usage
 
 **3. CompressToJpeg** - *This function will compress as a single input file and create a Jpeg output file.*
 
-   ```C / C++
-   //C/C++
+   ```C#
+   //C#
    int WINAPI CompressToJpeg(HANDLE ImgWizHlpHandle , char **InputFile , char *Output_Directory, int
    option)
 
@@ -267,6 +302,21 @@ C/C++ & Java usage
    //ResetAllDPI = 1
    //ResetZeroDPI = 2
    ```
+
+   ```C / C++
+   //C/C++
+   ret = CompressToJPG(ImageWizHandle, InputFileArray, 1, OutputFile, reset);
+
+   //ImgWizHlpHandle  - Handle created using initialization
+   //InputFile        - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
+   //Output_Directory - Expected output directory.
+   //option           - Following are the possible options:-
+   
+   //No_DPI_change 
+   //ResetAllDPI 
+   //ResetZeroDPI 
+   ```
+
    ```Java
    //Java
    public int CompressToJPEG(String[] inputFile, String outPutFile, ResetOption resetOption)
