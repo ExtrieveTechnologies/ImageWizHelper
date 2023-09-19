@@ -42,43 +42,6 @@ obj.TerminateWizHelper();
 ```
 This object reference will be used for all the imaging functionalities.
 
-## Functionalties
-
-1. **CompressToTiff**	   -	*This function compresses multiple Images to a single tiff file.* 
-2. **CompressToTiff**	   -	*This function compresses multiple images to a single PDF file*
-3. **CompressToJpeg**	   -	*This function converts a single image file to a JEPG file* 
-4. **AppendToTiffImage** -	*This function appends a single image file over an existing Tiff file*
-
-C/C++ Initialization
--------------
-**1. Initialize** - *This function is used to initialize the DLL and validate the license. This function should
-   be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
-   handle.*
-     
-   ``` C#
-   //C#
-   HANDLE WINAPI Initialize (char *Logpath)
-   ```
-
-   **Parameter Name**
-   - **Logpath** - *Pass a path with write acccess to the application. Debug logs are created in this path. This is optional parameter.
-      Debugging is not required then this can be kept as null.*
-
-**2. Terminate** - *Each initialized handle should be terminated using this function.*
-
-   ```C#
-   //C#
-   int WINAPI Terminate(HANDLE ImgWizHlpHandle)
-   ```
-
-   ```C
-   //C
-   void TerminateHdl(HANDLE ImageWizHandle)
-   ```
-    
-   **Parameter Name**
-   - **ImgWizHlpHandle** - *Handle created during initialization*
-
 Java Initialization
 -------------
 **1. Initialize** - *This function is used to initialize the DLL and validate the license. This function should
@@ -131,9 +94,14 @@ Java Initialization
    **Parameter Name**
    - **hdl** - *Handle created during initialization*
 
+## Functionalties
 
+1. **CompressToTiff**	   -	*This function compresses multiple Images to a single tiff file.* 
+2. **CompressToTiff**	   -	*This function compresses multiple images to a single PDF file*
+3. **CompressToJpeg**	   -	*This function converts a single image file to a JEPG file* 
+4. **AppendToTiffImage** -	*This function appends a single image file over an existing Tiff file*
 
-C/C++ & Java usage
+C/C++ & Java fuction implementation
 ------------------
 
 **1. CompressToTiff** - *This function will take array of input files and will create a single Tif output file. Support input as
@@ -150,20 +118,6 @@ C/C++ & Java usage
    //InputFileCount  - Number of files.
    //Output_Filename - Expected output file name with directory.
    //option          - Following are the possible options.
-   
-   //No_DPI_change = 0 NO
-   //ResetAllDPI = 1
-   //ResetZeroDPI = 2
-   ```
-
-   ```C / C++
-   //C/C++
-   ret = CompressToTIFF(ImageWizHandle, InputFileArray, 1, OutputFile, reset);
-
-    //ImageWizHandle - Handle created using initialization.
-   //InputFileArray       - Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.
-   //OutputFile - Expected output file name with directory.
-   //reset          - Following are the possible options.
    
    //No_DPI_change = 0 NO
    //ResetAllDPI = 1
@@ -192,16 +146,6 @@ C/C++ & Java usage
       ResetAllDPI,                
       ResetZeroDPI                
    };
-   ```
-
-   ```C / C++
-   //C
-   enum ResetOption
-   {
-     No_DPI_change,
-     ResetAllDPI,
-     ResetNonDPI
-   }
    ```
    
    ```Java
@@ -260,18 +204,6 @@ C/C++ & Java usage
    //ResetAllDPI = 1
    //ResetZeroDPI = 2
    ```
-   ```C / C++
-   //C / C++
-   ret = CompressToPDF(ImageWizHandle, InputFileArray, 1, OutputFile, reset);
-   //ImageWizHandle - Handle created using initialization.
-   //InputFileArray - Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.
-   //OutputFile     - Expected output file name with directory.
-   //reset          - Following are the possible options.
-
-   //No_DPI_change 
-   //ResetAllDPI
-   //ResetZeroDPI
-   ```
 
    ```Java
    //Java
@@ -303,20 +235,6 @@ C/C++ & Java usage
    //ResetZeroDPI = 2
    ```
 
-   ```C / C++
-   //C/C++
-   ret = CompressToJPG(ImageWizHandle, InputFileArray, 1, OutputFile, reset);
-
-   //ImgWizHlpHandle  - Handle created using initialization
-   //InputFile        - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
-   //Output_Directory - Expected output directory.
-   //option           - Following are the possible options:-
-   
-   //No_DPI_change 
-   //ResetAllDPI 
-   //ResetZeroDPI 
-   ```
-
    ```Java
    //Java
    public int CompressToJPEG(String[] inputFile, String outPutFile, ResetOption resetOption)
@@ -332,8 +250,8 @@ C/C++ & Java usage
 
 **4. AppendToTiff** - *This function will append a tiff image over an existing tiff image.*
 
-   ```C / C++
-   //C/C++
+   ```C#
+   //C#
    int WINAPI AppendToTiff(HANDLE ImgWizHlpHandle , char *InputFile , char *OutputFile, int option)
    
    //ImgWizHlpHandle - Handle created using initialization
@@ -363,8 +281,8 @@ C/C++ & Java usage
    It is recommended to keep a minimum of 150 as DPI to avoid Quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input format
    is not supported it will return false.
 
-   ```C / C++
-   //C/C++
+   ```C#
+   //C#
    INT32 OCRBWConversionToTiff(HANDLE ImgWizHlpHandle, char *InputFile, INT32 PageNo, char*Output_Filename , INT32 option )
 
    //ImgWizHlpHandle - Handle created using initialization
@@ -393,7 +311,7 @@ C/C++ & Java usage
 
 **6. SetLogFile** - This function will initiate the log dumping of the dll usage.
 
-   ```C / C++
+   ```C#
    //C/C++
    int WINAPI SetLogFile(HANDLE ImgWizHlpHandle , char *error_log_file, int log_level, int *error)
 
@@ -410,7 +328,7 @@ C/C++ & Java usage
    If the input file is smaller than the layout size then the DLL will not increase the size, as this will reduce the quality of the output image.* Also this DLL
    will maintain the aspect ratio of the original Image.
 
-   ```C / C++
+   ```C#
    //C/C++
    int WINAPI SetPageLayout(HANDLE ImgWizHlpHandle, LayoutType Page)
    ```
@@ -421,7 +339,7 @@ C/C++ & Java usage
    
    Following are the different Layout types supported
 
-   ```C / C++
+   ```C#
    //C/C++
    typedef enum
    {
@@ -479,7 +397,7 @@ C/C++ & Java usage
  
 **8. GetPageLayout** - *This will return the existing page setup.*
       
-  ```C / C++
+  ```C#
   //C/C++
   int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
   ```
@@ -494,7 +412,7 @@ C/C++ & Java usage
 
 **9. SetDPI** - *By default DLL will use 200 DPI as the output DPI. This parameter can be used to change the DPI.*
      
-  ```C / C++
+  ```C#
   //C/C++
   int WINAPI SetDPI(HANDLE ImgWizHlpHandle, DPI dpi)
   ```
@@ -504,8 +422,8 @@ C/C++ & Java usage
 
   **Following are the possible DPI supported**
     
-  ```C / C++
-  //C/C++
+  ```C#
+  //C#
   typedef enum
   {
     DPI_100 = 100,
@@ -560,7 +478,7 @@ C/C++ & Java usage
 
 **10. GetDPI** - *This function will return the existing DPi setup.*
 
-```C / C++
+```C#
 //C/C++
 int WINAPI GetDPI(HANDLE ImgWizHlpHandle, int *dpi)
 ```
@@ -571,7 +489,7 @@ public ImageDPI GetDPI()
 
 **11. SetImageQuality** - *By default the Quality is set as Document_Quality. This API is used to reset the output Quality*
 
-```C / C++
+```C#
 //C/C++
 int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
 ```
@@ -580,7 +498,7 @@ int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
 public int SetImageQuality(ImageQuality imageQuality)
 ```
 
-```C / C++
+```C#
 //C/C++
 No_DPI_change = 0
 ResetAllDPI = 1
@@ -631,7 +549,7 @@ public enum ImageQuality
 
 **12. GetImageQuality** - *This function will return the existing image quality setup.*
 
-```C / C++
+```C#
 //C/C++
 int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
 ```
@@ -641,8 +559,8 @@ public ImageQuality GetImageQuality()
     
 **13. SetConversion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
 
-```C / C++
-//C/C++
+```C#
+//C#
 int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
 ```
 ```Java
@@ -652,8 +570,8 @@ public int SetConversion(ConversionType convertionType)
 
 **Following are the possible supported conversion:**
 
-```C / C++
-//C/C++
+```C#
+//C#
 typedef enum
 {
   No_Conversion,
@@ -702,7 +620,7 @@ public enum ConversionType
 
 **14. GetConversion** - This function will return the existing conversion setup.
      
-```C / C++
+```C#
 //C/C++
 int WINAPI GetConversion(HANDLE ImgWizHlpHandle, ConvertionType Conversion)
 ```
@@ -722,8 +640,8 @@ format is not supported it will not return to 0.
 
 For successful compression, it will return 0.
 
-```C / C++
-//C/C++
+```C#
+//C#
 INT32 WINAPI CompressPagesToTiff_Array(HANDLE ImgWizHlpHandle, char *InputFile, char *OutputFile,INT32 *PageArray,
 INT32 PageArrayCount, BOOL Append, INT32 option)
 
@@ -754,8 +672,8 @@ public int CompressPagesToTiff_Array(String inputFile, String outputFile, int[] 
 
 **16. GetErrorDescription** - This method will return the error string for a specific error code.
 
-```C / C++
-//C/C++
+```C#
+//C#
 int WINAPI GetConversion(HANDLE ImgWizHlpHandle, ConvertionType Conversion)
 ```
 
