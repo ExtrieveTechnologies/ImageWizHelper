@@ -69,7 +69,7 @@ Java Initialization
    import com.extrieve.imaging.sdk.ImageWizHelperJNI.ResetOption;
    ```
 
-   *Once the import statements are included create the object class "ImageWizHelperJNI". The same object "HANDLE can be sued for calling functionalities
+   *Once the import statements are included create the object class "ImageWizHelperJNI". The same object "HANDLE can be used for calling functionalities
     of the SharedLibraries.*
 
    ``` Java
@@ -277,7 +277,7 @@ C/C++ & Java fuction implementation
    ```
 
 **5. OCRBWConversionToTiff** - This function will take single input files and create a Black and White output file. Which will be mainly helpful
-   for OCR purposes.The supported input file of type JPEg, BMP, and TIFF. By default, DLL will select 200 as the standard DPI & A4 as the page size.
+   for OCR purposes.The supported input file of type JPG, BMP, and TIFF. By default, DLL will select 200 as the standard DPI & A4 as the page size.
    It is recommended to keep a minimum of 150 as DPI to avoid Quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input format
    is not supported it will return false.
 
