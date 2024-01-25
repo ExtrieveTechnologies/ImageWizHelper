@@ -97,7 +97,7 @@ Java Initialization
 ## Functionalties
 
 1. **CompressToTiff**	   -	*This function compresses multiple Images to a single tiff file.* 
-2. **CompressToTiff**	   -	*This function compresses multiple images to a single PDF file*
+2. **CompressToPdf**	   -	*This function compresses multiple images to a single PDF file*
 3. **CompressToJpeg**	   -	*This function converts a single image file to a JEPG file* 
 4. **AppendToTiffImage** -	*This function appends a single image file over an existing Tiff file*
 
