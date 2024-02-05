@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>-i "D:\WithWork\Abhishek\TestImageWizHelperTool\InputFile\PAN_HRIC.jpg" -o "D:\Rajesh\TestProject\ImageWizHelperDemo\output\a.tiff" -ct "tiff"</StartArguments>
+    <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <StartArguments>-i "D:\WithWork\Abhishek\TestImageWizHelperTool\Input\RD UAM Points %281%29.pdf" -o "D:\WithWork\Abhishek\TestImageWizHelperTool\output\a.tiff" -ct "pdf"</StartArguments>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+</Project>
