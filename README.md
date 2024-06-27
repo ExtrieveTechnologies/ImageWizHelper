@@ -5,9 +5,11 @@
 
 Introduction
 -------------
-Struggling to find a reliable Imaging SDK for Compression? Need an Imaging SDK for converting images to PDF or TIFF ? Look no further! Extrieve introduces ImageWizHelper, the ultimate solution for all your image compression, conversion, and merging requirements.
+Struggling to find a reliable Imaging SDK for Compression? Need an Imaging SDK for converting images to PDF or TIFF ? Look no further! Extrieve introduces ImageWizHelper, the ultimate solution for all your image compression, conversion, and merging requirements. Not only that! It also offers flexibility where you can change Image DPI, validate and reduce Image size with ease.
 
 If you want to try the DLL, you can download it from this link: [DLL Link](https://github.com/ExtrieveTechnologies/ImageWizHelper/releases/tag/v6.0.0.8)
+
+
 
 Compatibility
 -------------
