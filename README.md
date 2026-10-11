@@ -1,18 +1,22 @@
-# ImageWizHelper - Imaging SDK from Extrieve
-<img src="https://raw.githubusercontent.com/ExtrieveTechnologies/ImageWizHelper/main/ImageWizHelper_v2.gif" alt="img-verification" autoplay>
+# ImageWizHelper: Image Compression and Conversion SDK for Server and Desktop
 
-> **Developer-friendly** & **Easy to integration** DLL.
+<img src="https://raw.githubusercontent.com/ExtrieveTechnologies/ImageWizHelper/main/ImageWizHelper_v2.gif" alt="ImageWizHelper imaging SDK demo">
 
-Introduction
--------------
-Struggling to find a reliable Imaging SDK for Compression? Need an Imaging SDK for converting images to PDF or TIFF ? Look no further! Extrieve introduces ImageWizHelper, the ultimate solution for all your image compression, conversion, and merging requirements. Not only that! It also offers flexibility where you can change Image DPI, validate and reduce Image size with ease.
+**ImageWizHelper** is Extrieve's imaging SDK for server and desktop applications, also offered as the QuickCapture Native Imaging SDK. It compresses images, converts and merges them into PDF or TIFF, changes image DPI, and validates and reduces image size. It is delivered as a DLL with C# and Java interfaces.
 
-If you want to try the DLL, you can download it from this link: [DLL Link](https://github.com/ExtrieveTechnologies/ImageWizHelper/releases/tag/v6.0.0.8)
+[Product page](https://www.extrieve.com/platforms/quickcapture/imaging/) · [Download the DLL](https://github.com/ExtrieveTechnologies/ImageWizHelper/releases/tag/v6.0.0.8) · [Documentation](https://docs.extrieve.in/) · [Discussions](https://github.com/orgs/ExtrieveTechnologies/discussions/categories/technical-support) · [Contact](https://www.extrieve.com/contact/)
 
+## Contents
 
+- [Compatibility](#compatibility)
+- [C# usage](#c-usage)
+- [Java Initialization](#java-initialization)
+- [Functionalities](#functionalities)
+- [C/C++ & Java function implementation](#cc--java-function-implementation)
+- [Other platforms and related SDKs](#other-platforms-and-related-sdks)
+- [Support](#support)
 
-Compatibility
--------------
+## Compatibility
 Currently the DLL API's are available in:
  * **C#**
  * **Java**
@@ -20,12 +24,10 @@ Currently the DLL API's are available in:
 Currently the **ImageWizHelper DLL** usage is from C, VB and C#
 
 For the Java Interface we use a **ImageWizHelper JNI DLL**
- 
 
-C# usage
--------------
+## C# usage
 
-A wrapper class called ImageWizHelperAPI is provided which can be used for C#. DLL has to be 
+A wrapper class called ImageWizHelperAPI is provided which can be used for C#. DLL has to be
 initialized first before use. Following is the sample code for the initialization of the DLL
 
 ```C#
@@ -34,11 +36,11 @@ ImageWizHelperAPI obj = new ImageWizHelperAPI();
 obj.InitializeWizHelper(local_bin_path, local_error_log_path);
 ```
 This function should be called once per thread by the application. If the application is used in a multithreaded
-context then each thread should initialize a different ImageWizHelperAPI object and initialize once before using 
+context then each thread should initialize a different ImageWizHelperAPI object and initialize once before using
 it.
 
-**local_error_log_path** - This path is optional. Pass a path with write access for the application. This will 
-create log files which can be used for debugging any issues. If this is not passed then loggin will be disabled.
+**local_error_log_path** - This path is optional. Pass a path with write access for the application. This will
+create log files which can be used for debugging any issues. If this is not passed then logging will be disabled.
 
 ```C#
 //C#
@@ -46,12 +48,11 @@ obj.TerminateWizHelper();
 ```
 This object reference will be used for all the imaging functionalities.
 
-Java Initialization
--------------
+## Java Initialization
 **1. Initialize** - *This function is used to initialize the DLL and validate the license. This function should
-   be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different 
+   be called once per thread by the application. If DLL is used in a multithreaded context each thread should maintain a different
    handle.*
-     
+
    ``` Java
    //Java
    package com.extrieve.imaging.sdk;
@@ -72,7 +73,6 @@ Java Initialization
    import com.extrieve.imaging.sdk.ImageWizHelperJNI.Layout;
    import com.extrieve.imaging.sdk.ImageWizHelperJNI.ResetOption;
    ```
-
    *Once the import statements are included create the object class "ImageWizHelperJNI". The same object "HANDLE can be used for calling functionalities
     of the SharedLibraries.*
 
@@ -84,7 +84,7 @@ Java Initialization
 
    ``` Java
    //Java
-   ImageDPI DPI = HANDLE.GetDPI();   
+   ImageDPI DPI = HANDLE.GetDPI();
    ```
    *In the above example the function "GetDPI" can be called from the object declared above "HANDLE".*
 
@@ -94,25 +94,23 @@ Java Initialization
    //Java
    private static native int terminate(long hdl);
    ```
-    
    **Parameter Name**
    - **hdl** - *Handle created during initialization*
 
-## Functionalties
+## Functionalities
 
-1. **CompressToTiff**	   -	*This function compresses multiple Images to a single tiff file.* 
+1. **CompressToTiff**	   -	*This function compresses multiple Images to a single tiff file.*
 2. **CompressToPdf**	   -	*This function compresses multiple images to a single PDF file*
-3. **CompressToJpeg**	   -	*This function converts a single image file to a JEPG file* 
+3. **CompressToJpeg**	   -	*This function converts a single image file to a JPEG file*
 4. **AppendToTiffImage** -	*This function appends a single image file over an existing Tiff file*
 
-C/C++ & Java fuction implementation
-------------------
+## C/C++ & Java function implementation
 
 **1. CompressToTiff** - *This function will take array of input files and will create a single Tif output file. Support input as
    array of JPEG, PNG, bmp, & TIFF. By default DLL will select 200 as the standard DPI and A4 as the page size. It is recommended to
    keep a minimum of 150 as DPi to avoid Quality issues. Formats like DJvu, JBIG2 an data PDF are not supported. If input format is not
    supported it will return false.*
-   
+
    ```C#
    //C#
    INT32 WINAPI CompressToTIFF(HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char *Output_Filename , INT32 option )
@@ -122,12 +120,11 @@ C/C++ & Java fuction implementation
    //InputFileCount  - Number of files.
    //Output_Filename - Expected output file name with directory.
    //option          - Following are the possible options.
-   
+
    //No_DPI_change = 0 NO
    //ResetAllDPI = 1
    //ResetZeroDPI = 2
    ```
-    
    ```Java
    //Java
    public int CompressToTIFF(String[] inputFiles, String outputFile, ResetOption resetOption)
@@ -135,8 +132,8 @@ C/C++ & Java fuction implementation
    //inputFiles  - Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.
    //outputFile  - Expected output file with directory.
    //resetOption - Following are the possible options: -
-   
-   //No_DPI_change(0), DPI will not be resetted this case . 
+
+   //No_DPI_change(0), DPI will not be resetted this case .
    //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
    //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI
    ```
@@ -146,28 +143,27 @@ C/C++ & Java fuction implementation
    //C#
    public enum ResetOption
    {
-      No_DPI_change,              
-      ResetAllDPI,                
-      ResetZeroDPI                
+      No_DPI_change,
+      ResetAllDPI,
+      ResetZeroDPI
    };
    ```
-   
    ```Java
    //Java
    public enum ResetOption
-   {	
-     No_DPI_change(0),              
-     ResetAllDPI(1),              
-     ResetZeroDPI(2);			 
-	    
+   {
+     No_DPI_change(0),
+     ResetAllDPI(1),
+     ResetZeroDPI(2);
+
      private int value;
      private static HashMap<Object, Object> map = new HashMap<Object, Object>();
-	
+
      ResetOption(int value)
      {
       this.value = value;
      }
-	   	 	
+
      static
      {
        for (ResetOption resetOption : ResetOption.values())
@@ -175,25 +171,23 @@ C/C++ & Java fuction implementation
 	 map.put(resetOption.value, resetOption);
        }
      }
-	    	
+
      public static ResetOption valueOf(int resetOption)
      {
        return (ResetOption) map.get(resetOption);
-     }   	 	
-	
+     }
+
      public int getValue()
      {
        return value;
      }
-	    	
+
 }
    ```
-   
-   
-**2. CompressToPDF** - *This function will take an array of input files and create a single PDF output file. Support input as an array of JPEG, PNG, BMP, & TIFF. By 
-   default, DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep a minimum of 150 DPI to avoid quality issues. Formats like DJvu, 
+**2. CompressToPDF** - *This function will take an array of input files and create a single PDF output file. Support input as an array of JPEG, PNG, BMP, & TIFF. By
+   default, DLL will select 200 as the standard DPI & A4 as the page size. It is recommended to keep a minimum of 150 DPI to avoid quality issues. Formats like DJvu,
    JBIG2, and data PDF are not supported. If input format is not supported it will return false.*
-   
+
    ```C#
    //C#
    int WINAPI CompressToPDF (HANDLE ImgWizHlpHandle, char **InputFile, INT32 InputFileCount, char*Output_Filename, int option )
@@ -203,25 +197,23 @@ C/C++ & Java fuction implementation
    //InputFileCount  - Number of files.
    //Output_Filename - Expected output file name with directory.
    //option          - Following are the possible options.
-   
+
    //No_DPI_change = 0 NO
    //ResetAllDPI = 1
    //ResetZeroDPI = 2
    ```
-
    ```Java
    //Java
    public int CompressToPDF(String[] inputFiles, String outputFile, ResetOption resetOption)
-   
+
    //inputFiles  - Array on input files. In case of multipage TIFF all pages will be considered as input. This should be with full path.
    //outputFile  - Expected output file with directory.
    //resetOption - Following are the possible options: -
-   
-   //No_DPI_change(0), DPI will not be resetted this case . 
-   //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
-   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI 
-   ```
 
+   //No_DPI_change(0), DPI will not be resetted this case .
+   //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
+   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI
+   ```
 **3. CompressToJpeg** - *This function will compress as a single input file and create a Jpeg output file.*
 
    ```C#
@@ -233,12 +225,11 @@ C/C++ & Java fuction implementation
    //InputFile        - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
    //Output_Directory - Expected output directory.
    //option           - Following are the possible options:-
-   
+
    //No_DPI_change = 0 NO
    //ResetAllDPI = 1
    //ResetZeroDPI = 2
    ```
-
    ```Java
    //Java
    public int CompressToJPEG(String[] inputFile, String outPutFile, ResetOption resetOption)
@@ -246,18 +237,17 @@ C/C++ & Java fuction implementation
    //inputFile   - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
    //outPutFile  - Expected output directory.
    //resetOption - Following are the possible options:-
-   
-   //No_DPI_change(0), DPI will not be resetted this case . 
-   //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
-   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI 
-   ```
 
+   //No_DPI_change(0), DPI will not be resetted this case .
+   //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
+   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI
+   ```
 **4. AppendToTiff** - *This function will append a tiff image over an existing tiff image.*
 
    ```C#
    //C#
    int WINAPI AppendToTiff(HANDLE ImgWizHlpHandle , char *InputFile , char *OutputFile, int option)
-   
+
    //ImgWizHlpHandle - Handle created using initialization
    //InputFile       - Array on input files. In the case of multipage TIFF, all pages will be considered as input. This should be with full path.
    //Output_File     - Expected output file name with directory
@@ -265,7 +255,7 @@ C/C++ & Java fuction implementation
 
    //No_DPI_change = 0 NO
    //ResetAllDPI = 1
-   //ResetZeroDPI = 2 
+   //ResetZeroDPI = 2
    ```
    ```Java
    //Java
@@ -275,11 +265,10 @@ C/C++ & Java fuction implementation
    //outputFile     - Expected output file name with directory
    //resetOption    - Following are the possible options
 
-   //No_DPI_change(0), DPI will not be resetted this case . 
+   //No_DPI_change(0), DPI will not be resetted this case .
    //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
-   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI 
+   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI
    ```
-
 **5. OCRBWConversionToTiff** - This function will take single input files and create a Black and White output file. Which will be mainly helpful
    for OCR purposes.The supported input file of type JPG, BMP, and TIFF. By default, DLL will select 200 as the standard DPI & A4 as the page size.
    It is recommended to keep a minimum of 150 as DPI to avoid Quality issues. Formats like DJvu, JBIG2, and data PDF are not supported. If input format
@@ -307,12 +296,10 @@ C/C++ & Java fuction implementation
    //outputFile     - Expected output file name with directory
    //resetOption    - Following are the possible options
 
-   //No_DPI_change(0), DPI will not be resetted this case . 
+   //No_DPI_change(0), DPI will not be resetted this case .
    //ResetAllDPI(1), Every image DPI will be resetted to selected DPI.  Dimension also will be changed according to DPI
-   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI 
+   //ResetZeroDPI(2), If DPI is not available then DPI will setted for the image.  Dimension also will be changed according to DPI
    ```
-
-
 **6. SetLogFile** - This function will initiate the log dumping of the dll usage.
 
    ```C#
@@ -327,8 +314,7 @@ C/C++ & Java fuction implementation
    //                        2 - Full Debug logging
    //error           - This will return the error for logging initialization.
    ```
-
-**7. SetPageLayout** - *By default DLL will create output as A4 layout. This parameter can be used to change the type of Layout for the output creation. 
+**7. SetPageLayout** - *By default DLL will create output as A4 layout. This parameter can be used to change the type of Layout for the output creation.
    If the input file is smaller than the layout size then the DLL will not increase the size, as this will reduce the quality of the output image.* Also this DLL
    will maintain the aspect ratio of the original Image.
 
@@ -337,10 +323,9 @@ C/C++ & Java fuction implementation
    int WINAPI SetPageLayout(HANDLE ImgWizHlpHandle, LayoutType Page)
    ```
    ```Java
-   //Java 
+   //Java
    public int SetPageLayout(Layout layout)
    ```
-   
    Following are the different Layout types supported
 
    ```C#
@@ -370,15 +355,15 @@ C/C++ & Java fuction implementation
      A5(5),
      A6(6),
      A7(7);
-	
+
      private int value;
      private static HashMap<Object, Object> map = new HashMap<Object, Object>();
-	
+
      Layout(int value)
      {
       this.value = value;
      }
-	
+
      static
      {
       for (Layout layout : Layout.values())
@@ -391,31 +376,29 @@ C/C++ & Java fuction implementation
      {
       return (Layout) map.get(layout);
      }
-	
+
      public int getValue()
      {
       return value;
      }
    }
    ```
- 
 **8. GetPageLayout** - *This will return the existing page setup.*
-      
+
   ```C#
   //C/C++
   int WINAPI GetPageLayout(HANDLE ImgWizHlpHandle, int *Height, int *Width)
   ```
   ```Java
   //Java
-  public Layout GetPageLayouWidth( ) 
+  public Layout GetPageLayouWidth( )
   ```
   ```Java
   //Java
   public Layout GetPageLayoutHeight( )
   ```
-
 **9. SetDPI** - *By default DLL will use 200 DPI as the output DPI. This parameter can be used to change the DPI.*
-     
+
   ```C#
   //C/C++
   int WINAPI SetDPI(HANDLE ImgWizHlpHandle, DPI dpi)
@@ -423,9 +406,8 @@ C/C++ & Java fuction implementation
   ```Java
   public int SetDPI(ImageDPI imageDPI)
   ```
-
   **Following are the possible DPI supported**
-    
+
   ```C#
   //C#
   typedef enum
@@ -449,16 +431,16 @@ C/C++ & Java fuction implementation
    DPI_300(3),
    DPI_500(4),
    DPI_600(5);
-	    	
+
    private int value;
-	
+
    private static HashMap<Object, Object> map = new HashMap<Object, Object>();
-	    	
+
    ImageDPI(int value)
    {
     this.value = value;
    }
-	
+
    static
    {
 
@@ -478,8 +460,7 @@ C/C++ & Java fuction implementation
     return value;
    }
   }
-  ``` 
-
+  ```
 **10. GetDPI** - *This function will return the existing DPi setup.*
 
 ```C#
@@ -490,7 +471,6 @@ int WINAPI GetDPI(HANDLE ImgWizHlpHandle, int *dpi)
 //Java
 public ImageDPI GetDPI()
 ```
-
 **11. SetImageQuality** - *By default the Quality is set as Document_Quality. This API is used to reset the output Quality*
 
 ```C#
@@ -501,14 +481,12 @@ int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
 //Java
 public int SetImageQuality(ImageQuality imageQuality)
 ```
-
 ```C#
 //C/C++
 No_DPI_change = 0
 ResetAllDPI = 1
 ResetZeroDPI = 2
 ```
-
 ```Java
 //Java
 public enum ImageQuality
@@ -517,15 +495,15 @@ public enum ImageQuality
  Photo_Quality(0),
  Document_Quality(1),
  Compressed_Document(2);
-	        
+
  private final int value;
  private static HashMap<Object, Object> map = new HashMap<Object, Object>();
-	
+
  ImageQuality(int value)
  {
   this.value = value;
  }
-	
+
  static
  {
   for (ImageQuality imageQuality : ImageQuality.values())
@@ -533,19 +511,18 @@ public enum ImageQuality
    map.put(imageQuality.value, imageQuality);
   }
  }
-	    	
+
  public static ImageQuality valueOf(int imageQuality)
  {
   return (ImageQuality) map.get(imageQuality);
  }
-	    	
+
  public int getValue()
  {
   return value;
  }
 }
 ```
-
 **Following are the recommended qualities:**
 - **Photo_Quality**       - *To be used when higher Quality is required.*
 - **Document_Quality**    - *Recommended Default quality.*
@@ -560,7 +537,6 @@ int WINAPI GetImageQuality(HANDLE ImgWizHlpHandle, int *Quality)
 ```Java
 public ImageQuality GetImageQuality()
 ```
-    
 **13. SetConversion** - *By default DLL will use no conversion for the output file. This parameter can be used to change the conversion.*
 
 ```C#
@@ -571,7 +547,6 @@ int WINAPI SetImageQuality(HANDLE ImgWizHlpHandle, ImageQuality Quality)
 //Java
 public int SetConversion(ConversionType convertionType)
 ```
-
 **Following are the possible supported conversion:**
 
 ```C#
@@ -583,7 +558,6 @@ typedef enum
   Convert_To_Grey
 } ConversionType;
 ```
-
 ```Java
 //Java
 public enum ConversionType
@@ -592,15 +566,15 @@ public enum ConversionType
  No_Conversion(0),
  Convert_To_BW(1),
  Convert_To_Grey(2);
-	    	
+
  private int value;
  private static HashMap<Object, Object> map = new HashMap<Object, Object>();
-	
+
   ConversionType(int value)
   {
    this.value = value;
   }
-	    	 
+
   static
   {
    for (ConversionType conversiontype : ConversionType.values())
@@ -613,27 +587,24 @@ public enum ConversionType
   {
    return (ConversionType) map.get(conversiontype);
   }
-	
+
   public int getValue()
   {
    return value;
   }
-	    	
-} 
-```
 
+}
+```
 **14. GetConversion** - This function will return the existing conversion setup.
-     
+
 ```C#
 //C/C++
 int WINAPI GetConversion(HANDLE ImgWizHlpHandle, ConvertionType Conversion)
 ```
-
 ```Java
 //Java
 public ConversionType GetConversion()
 ```
-    
 **15. CompressPagesToTiff_Array** - *This function will take a single input file and take the file's pages in an array to compress those pages in a
 single output.*
 
@@ -661,7 +632,6 @@ INT32 PageArrayCount, BOOL Append, INT32 option)
 //ResetAllDPI = 1
 //ResetZeroDPI = 2
 ```
-
 ```Java
 //Java
 public int CompressPagesToTiff_Array(String inputFile, String outputFile, int[] pageArray, boolean append,ResetOption resetOption)
@@ -672,20 +642,16 @@ public int CompressPagesToTiff_Array(String inputFile, String outputFile, int[] 
 //append          - Boolean value (true/false), which helps to use a single output file while Multiple Compression operations.
 //resetOption          - Following are the possible options: -
 ```
-  
-
 **16. GetErrorDescription** - This method will return the error string for a specific error code.
 
 ```C#
 //C#
 int WINAPI GetConversion(HANDLE ImgWizHlpHandle, ConvertionType Conversion)
 ```
-
 ```Java
 //Java
-public String GetErrorDescription(int errorCode) 
+public String GetErrorDescription(int errorCode)
 ```
-
 **Error Description for respective error code return**
 
   - ERR_INAVLID_EDITOR_HANDLE = **1** // "Invalid Editor Handle"
@@ -706,4 +672,19 @@ public String GetErrorDescription(int errorCode)
   - ERR_LIMAGING = 24 // "Error from Image Library"
   - ERR_EXIF_FAILED = 25 // "Error in reading exif information"
 
-     
+## Other platforms and related SDKs
+
+- QuickCapture for [Android](https://github.com/ExtrieveTechnologies/QuickCapture_Android), [iOS](https://github.com/ExtrieveTechnologies/QuickCapture_IOS), [React Native](https://github.com/ExtrieveTechnologies/QuickCapture_react_native), [Flutter](https://pub.dev/packages/quickcapture), [Web](https://github.com/ExtrieveTechnologies/QuickCapture_WEB)
+- [QuickCapture overview](https://github.com/ExtrieveTechnologies/QuickCapture): all platforms, features and FAQ
+- [SplicerAI](https://github.com/ExtrieveTechnologies/SplicerAi): KYC and document data extraction, classification and Aadhaar masking
+
+## Support
+
+- **Documentation:** [docs.extrieve.in](https://docs.extrieve.in/)
+- **Technical questions:** [GitHub Discussions](https://github.com/orgs/ExtrieveTechnologies/discussions/categories/technical-support)
+- **Developer support:** [devsupport@extrieve.com](mailto:devsupport@extrieve.com)
+- **Sales and evaluation:** [extrieve.com/contact](https://www.extrieve.com/contact/)
+
+---
+
+© 1996–2026 [Extrieve Technologies](https://www.extrieve.com/). All rights reserved.
